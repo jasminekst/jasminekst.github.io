@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trust Is the New Checkout · Kyi Sin Thant</title>
+<meta name="description" content="A strategy case on AI shopping agents and what Visa should do next. Independent analysis by Kyi Sin Thant.">
+<meta property="og:title" content="Trust Is the New Checkout">
+<meta property="og:description" content="How Visa can turn AI shopping agents from a pilot into a habit. A strategy case by Kyi Sin Thant.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,6..72,500&family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: 16:9 slides stacked down the page; type scales with each slide's width (cqw), so the same file prints to PDF one slide per page. */
+:root {
+  --navy: #1a1f71;
+  --blue: #1434cb;
+  --gold: #f7b600;
+  --ink: #141a3d;
+  --muted: #5b6283;
+  --line: #e1e4f0;
+  --paper: #ffffff;
+  --mist: #f3f5fb;
+  --page: #e9ecf5;
+  --sans: "Manrope", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --serif: "Newsreader", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--page); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+
+.toolbar { position: sticky; top: 0; z-index: 5; background: var(--navy); color: #fff; }
+.toolbar-inner { max-width: 1240px; margin: 0 auto; padding: 12px 20px; display: flex; gap: 10px 18px; align-items: center; justify-content: space-between; flex-wrap: wrap; font-size: 14px; }
+.toolbar a { color: #fff; text-decoration: none; font-weight: 600; }
+.toolbar .links { display: flex; gap: 10px; flex-wrap: wrap; }
+.toolbar .pill { border: 1.5px solid rgba(255,255,255,.35); padding: 6px 14px; border-radius: 999px; }
+.toolbar .pill.gold { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+.toolbar .pill:hover { border-color: #fff; }
+
+.deck { max-width: 1240px; margin: 0 auto; padding: 28px 20px 64px; display: grid; gap: 28px; }
+.slide {
+  container-type: inline-size; position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden;
+  background: var(--paper); border-radius: 14px; box-shadow: 0 10px 30px rgba(26, 31, 113, .12);
+}
+.s { position: absolute; inset: 0; padding: 5.2cqw 6cqw 4.6cqw; display: flex; flex-direction: column; font-size: 1.55cqw; line-height: 1.45; }
+.s::after { /* signature gold rule bottom-left */
+  content: ""; position: absolute; left: 6cqw; bottom: 2.6cqw; width: 4cqw; height: .35cqw; background: var(--gold); border-radius: 1cqw;
+}
+.foot { position: absolute; right: 6cqw; bottom: 2.1cqw; font: 500 .95cqw var(--mono); color: var(--muted); letter-spacing: .04em; }
+.kicker { font: 500 1cqw var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--blue); margin: 0 0 1.2cqw; }
+h1, h2, h3, p { margin: 0; }
+h2 { font-size: 3.1cqw; line-height: 1.12; font-weight: 800; letter-spacing: -.02em; color: var(--navy); max-width: 30ch; text-wrap: balance; }
+h2 em, h1 em { font-family: var(--serif); font-style: italic; font-weight: 500; color: var(--blue); letter-spacing: -.01em; }
+.sub { color: var(--muted); margin-top: 1.2cqw; max-width: 62ch; }
+.body { flex: 1; display: grid; margin-top: 3cqw; min-height: 0; }
+.src { position: absolute; left: 11.5cqw; bottom: 2cqw; font-size: .85cqw; color: var(--muted); max-width: 70cqw; }
+
+/* title + dark slides */
+.dark { background: var(--navy); color: #fff; }
+.dark .s::after { background: var(--gold); }
+.dark .foot, .dark .src { color: rgba(255,255,255,.6); }
+.dark .kicker { color: var(--gold); }
+.dark h2 { color: #fff; }
+.dark h2 em { color: var(--gold); }
+.title-s { justify-content: center; }
+.title-s h1 { font-size: 6.4cqw; line-height: 1; font-weight: 800; letter-spacing: -.035em; max-width: 14ch; }
+.title-s h1 em { color: var(--gold); }
+.title-s .lede { font-size: 2cqw; color: rgba(255,255,255,.82); margin-top: 2.2cqw; max-width: 40ch; }
+.title-s .by { margin-top: 4cqw; font-size: 1.35cqw; color: rgba(255,255,255,.75); }
+.title-s .by b { color: #fff; font-weight: 700; }
+.disclaimer { position: absolute; left: 6cqw; bottom: 4cqw; font-size: .9cqw; color: rgba(255,255,255,.5); }
+.waves { position: absolute; right: -4cqw; top: 0; bottom: 0; width: 46cqw; opacity: .9; }
+
+/* why I care */
+.quote { font-family: var(--serif); font-style: italic; font-size: 2.9cqw; line-height: 1.3; color: var(--navy); max-width: 34ch; }
+.quote-wrap { display: grid; grid-template-columns: .9cqw 1fr; gap: 3cqw; align-items: start; margin-top: 2cqw; }
+.quote-wrap .bar { background: var(--gold); border-radius: 1cqw; height: 100%; }
+.why-note { margin-top: 2.6cqw; color: var(--muted); max-width: 64ch; font-size: 1.6cqw; }
+
+/* exec summary */
+.three { grid-template-columns: repeat(3, 1fr); gap: 2.2cqw; }
+.card { background: var(--mist); border-radius: 1.4cqw; padding: 2.4cqw; display: flex; flex-direction: column; gap: 1cqw; }
+.card .n { font: 500 1cqw var(--mono); color: var(--blue); letter-spacing: .1em; text-transform: uppercase; }
+.card h3 { font-size: 1.9cqw; line-height: 1.2; font-weight: 800; color: var(--navy); }
+.card p { font-size: 1.42cqw; color: var(--ink); }
+.card.hl { background: var(--navy); }
+.card.hl .n { color: var(--gold); } .card.hl h3, .card.hl p { color: #fff; }
+
+/* timeline */
+.timeline { grid-template-columns: repeat(5, 1fr); gap: 1.4cqw; align-content: start; position: relative; padding-top: 3cqw; }
+.timeline::before { content: ""; position: absolute; left: 0; right: 0; top: 1.15cqw; height: .25cqw; background: var(--line); }
+.ev { position: relative; display: grid; gap: .6cqw; align-content: start; }
+.ev::before { content: ""; position: absolute; top: -2.45cqw; left: 0; width: 1.3cqw; height: 1.3cqw; border-radius: 50%; background: var(--blue); border: .35cqw solid #fff; box-shadow: 0 0 0 .2cqw var(--blue); }
+.ev.visa::before { background: var(--gold); box-shadow: 0 0 0 .2cqw var(--gold); }
+.ev time { font: 500 1cqw var(--mono); color: var(--muted); }
+.ev b { font-size: 1.55cqw; color: var(--navy); line-height: 1.2; }
+.ev span { font-size: 1.3cqw; color: var(--muted); }
+.callout { margin-top: 3cqw; display: flex; align-items: center; gap: 2.4cqw; background: var(--mist); border-radius: 1.4cqw; padding: 2cqw 2.6cqw; }
+.callout .big { font-size: 4.2cqw; font-weight: 800; color: var(--blue); letter-spacing: -.03em; line-height: 1; white-space: nowrap; }
+.callout p { font-size: 1.5cqw; }
+
+/* charts */
+.split { grid-template-columns: 1.25fr 1fr; gap: 4cqw; align-items: center; }
+.chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+.chart text { font-family: var(--sans); }
+.legend { display: flex; gap: 2cqw; font-size: 1.15cqw; color: var(--muted); margin-top: 1cqw; }
+.legend i { display: inline-block; width: 1.1cqw; height: 1.1cqw; border-radius: .25cqw; margin-right: .6cqw; vertical-align: -.15cqw; }
+.points { display: grid; gap: 1.6cqw; }
+.point { border-left: .35cqw solid var(--gold); padding-left: 1.6cqw; }
+.point b { display: block; font-size: 2.5cqw; font-weight: 800; color: var(--navy); letter-spacing: -.02em; line-height: 1.1; }
+.point span { font-size: 1.35cqw; color: var(--muted); }
+
+/* trust bars */
+.bars { display: grid; gap: 1.5cqw; }
+.bar-row { display: grid; grid-template-columns: 7cqw 1fr; gap: 1.6cqw; align-items: center; }
+.bar-row .pct { font-size: 3cqw; font-weight: 800; color: var(--navy); letter-spacing: -.03em; text-align: right; }
+.bar-row .track { display: grid; gap: .5cqw; }
+.bar-row .fill { height: 1.1cqw; border-radius: 1cqw; background: var(--mist); overflow: hidden; }
+.bar-row .fill i { display: block; height: 100%; background: var(--blue); border-radius: 1cqw; }
+.bar-row.gold .fill i { background: var(--gold); }
+.bar-row .lbl { font-size: 1.3cqw; color: var(--ink); }
+.bar-row .lbl small { color: var(--muted); font-size: 1cqw; }
+.insight { background: var(--navy); color: #fff; border-radius: 1.6cqw; padding: 3cqw; display: grid; gap: 1.4cqw; align-content: center; }
+.insight p { font-family: var(--serif); font-style: italic; font-size: 2.5cqw; line-height: 1.3; }
+.insight p em { color: var(--gold); }
+.insight span { font-size: 1.25cqw; color: rgba(255,255,255,.7); }
+
+/* options table */
+table { width: 100%; border-collapse: collapse; font-size: 1.35cqw; }
+th { text-align: left; font: 500 .95cqw var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 0 1cqw 1cqw; border-bottom: .15cqw solid var(--line); }
+td { padding: 1.4cqw 1cqw; border-bottom: .15cqw solid var(--line); vertical-align: middle; }
+td:first-child { width: 34%; }
+td:first-child b { display: block; font-size: 1.6cqw; color: var(--navy); }
+td:first-child span { color: var(--muted); font-size: 1.2cqw; }
+td.c { text-align: center; }
+tr.rec td { background: #fff8e1; }
+tr.rec td:first-child { box-shadow: inset .5cqw 0 0 var(--gold); }
+.dot { display: inline-block; width: 1.7cqw; height: 1.7cqw; border-radius: 50%; border: .25cqw solid var(--blue); vertical-align: middle; }
+.dot.full { background: var(--blue); }
+.dot.half { background: linear-gradient(90deg, var(--blue) 50%, transparent 50%); }
+.tag-rec { display: inline-block; margin-top: .5cqw; font: 500 .9cqw var(--mono); background: var(--gold); color: var(--navy); padding: .2cqw .8cqw; border-radius: 1cqw; letter-spacing: .06em; }
+.key { margin-top: 1.4cqw; font-size: 1.1cqw; color: var(--muted); display: flex; gap: 2cqw; align-items: center; }
+.key .dot { width: 1.2cqw; height: 1.2cqw; margin-right: .5cqw; border-width: .2cqw; }
+
+/* recommendation */
+.moves { grid-template-columns: repeat(3, 1fr); gap: 2cqw; }
+.move { border-top: .45cqw solid var(--blue); padding-top: 1.6cqw; display: grid; gap: 1cqw; align-content: start; }
+.move .num { font: 500 1cqw var(--mono); color: var(--blue); letter-spacing: .1em; }
+.move h3 { font-size: 1.9cqw; line-height: 1.2; font-weight: 800; color: var(--navy); }
+.move p { font-size: 1.35cqw; }
+.move .why { font-size: 1.15cqw; color: var(--muted); background: var(--mist); border-radius: 1cqw; padding: 1cqw 1.2cqw; }
+.mock { display: grid; gap: .8cqw; background: var(--mist); border-radius: 1.2cqw; padding: 1.4cqw; font-size: 1.15cqw; }
+.mock-row { display: flex; justify-content: space-between; align-items: center; background: #fff; border-radius: .8cqw; padding: .8cqw 1cqw; }
+.mock-row b { color: var(--navy); }
+.mock-row .lim { font-family: var(--mono); color: var(--blue); }
+.toggle { width: 2.8cqw; height: 1.5cqw; border-radius: 1cqw; background: var(--blue); position: relative; }
+.toggle::after { content: ""; position: absolute; right: .25cqw; top: .25cqw; width: 1cqw; height: 1cqw; border-radius: 50%; background: #fff; }
+.toggle.off { background: #c9cede; } .toggle.off::after { right: auto; left: .25cqw; }
+
+/* metrics */
+.metrics { grid-template-columns: 1fr 1fr; gap: 2cqw 3cqw; align-content: start; }
+.metric { display: grid; grid-template-columns: 4.4cqw 1fr; gap: 1.4cqw; align-items: start; }
+.metric .ic { width: 4.4cqw; height: 4.4cqw; border-radius: 1.2cqw; background: var(--mist); display: grid; place-items: center; font: 800 1.6cqw var(--sans); color: var(--blue); }
+.metric b { display: block; font-size: 1.7cqw; color: var(--navy); }
+.metric span { font-size: 1.3cqw; color: var(--muted); }
+.pilot { margin-top: 2.4cqw; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-radius: 1.2cqw; overflow: hidden; }
+.pilot div { background: var(--navy); color: #fff; padding: 1.4cqw 1.8cqw; font-size: 1.25cqw; border-right: .15cqw solid rgba(255,255,255,.15); }
+.pilot div:last-child { border-right: 0; background: var(--blue); }
+.pilot b { display: block; font: 500 .95cqw var(--mono); color: var(--gold); letter-spacing: .08em; margin-bottom: .4cqw; }
+
+/* risks */
+.risks { grid-template-columns: 1fr 1fr; gap: 1.8cqw 3cqw; align-content: start; }
+.risk b { display: block; font-size: 1.7cqw; color: var(--navy); margin-bottom: .4cqw; }
+.risk p { font-size: 1.35cqw; color: var(--ink); }
+.risk p span { color: var(--blue); font-weight: 700; }
+
+/* sources */
+.sources { grid-template-columns: 1fr 1fr; gap: 1.2cqw 3cqw; font-size: 1.12cqw; align-content: start; }
+.sources div b { display: block; color: var(--navy); font-size: 1.2cqw; }
+.sources div { color: var(--muted); }
+.method { margin-top: 1.8cqw; font-size: 1.2cqw; background: var(--mist); border-radius: 1cqw; padding: 1.4cqw 1.8cqw; }
+
+/* print to PDF: one slide per page */
+@page { size: 13.333in 7.5in; margin: 0; }
+@media print {
+  body { background: #fff; }
+  .toolbar { display: none; }
+  .deck { padding: 0; gap: 0; max-width: none; }
+  .slide { width: 13.333in; height: 7.5in; aspect-ratio: auto; border-radius: 0; box-shadow: none; break-after: page; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+@media (max-width: 640px) { .deck { padding: 16px 12px 40px; gap: 16px; } .slide { border-radius: 8px; } }
+</style>
+</head>
+<body>
+
+<header class="toolbar">
+  <div class="toolbar-inner">
+    <a href="../../#visa">← Back to portfolio</a>
+    <div class="links">
+      <a class="pill gold" href="Kyi_Sin_Thant_Trust_Is_the_New_Checkout.pdf">Download PDF</a>
+      <a class="pill" href="Kyi_Sin_Thant_Visa_Agentic_Commerce_Model.xlsx">Excel model</a>
+    </div>
+  </div>
+</header>
+
+<main class="deck">
+
+  <!-- 1. Title -->
+  <section class="slide dark" aria-label="Title">
+    <svg class="waves" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true">
+      <g fill="none" stroke-linecap="round">
+        <path d="M40 360 C140 300 160 120 400 60" stroke="#f7b600" stroke-width="3"/>
+        <path d="M0 380 C120 330 170 170 400 120" stroke="#1434cb" stroke-width="2"/>
+        <path d="M80 400 C170 330 210 230 400 190" stroke="#ffffff" stroke-opacity=".25" stroke-width="1.5"/>
+        <path d="M-20 300 C110 260 120 60 400 0" stroke="#ffffff" stroke-opacity=".15" stroke-width="1.5"/>
+      </g>
+      <circle cx="400" cy="60" r="6" fill="#f7b600"/>
+    </svg>
+    <div class="s title-s">
+      <p class="kicker">Strategy case · Agentic commerce · Data &amp; AI</p>
+      <h1>Trust is the new <em>checkout</em></h1>
+      <p class="lede">How Visa can turn AI shopping agents from a pilot into a habit.</p>
+      <p class="by"><b>Kyi Sin Thant</b> · M.S. Business Analytics, USC Marshall · November 2026</p>
+      <p class="disclaimer">Independent analysis built from public sources. Not affiliated with or endorsed by Visa.</p>
+    </div>
+  </section>
+
+  <!-- 2. Why I care -->
+  <section class="slide" aria-label="Why I picked this question">
+    <div class="s">
+      <p class="kicker">Why I picked this question</p>
+      <div class="quote-wrap">
+        <span class="bar" aria-hidden="true"></span>
+        <div>
+          <p class="quote">When I built AfterChat, the app wrote the thank-you email but never sent it for you. Students told us they wanted the final say.</p>
+          <p class="why-note">Shopping agents face the same question, with real money on the line. Visa has already built the rails for AI agents to pay. I wanted to understand what it would take for people to actually use them, and what Visa's Data &amp; AI team could do about it.</p>
+        </div>
+      </div>
+    </div>
+    <span class="foot">02</span>
+  </section>
+
+  <!-- 3. Short version -->
+  <section class="slide" aria-label="The short version">
+    <div class="s">
+      <p class="kicker">The short version</p>
+      <h2>The rails are built. <em>Trust</em> is what's missing.</h2>
+      <div class="body three">
+        <div class="card"><span class="n">What's happening</span><h3>AI assistants have started buying on people's behalf.</h3><p>Morgan Stanley expects $190B to $385B of US spending to run through shopping agents by 2030, 10% to 20% of e-commerce.</p></div>
+        <div class="card"><span class="n">What I found</span><h3>The revenue is modest. The position is big.</h3><p>In my base case that's about $99B on Visa and $280M of net revenue, under 1% of today's. Only 6% of shoppers would let an AI buy without checking in first.</p></div>
+        <div class="card hl"><span class="n">What I recommend</span><h3>Make control visible to shoppers.</h3><p>Put agent limits and approvals inside the banking apps people already use. Start with everyday baskets under $100. Give every agent purchase a clear path to fix mistakes.</p></div>
+      </div>
+    </div>
+    <span class="foot">03</span>
+  </section>
+
+  <!-- 4. Timeline -->
+  <section class="slide" aria-label="Agents are moving from suggesting to paying">
+    <div class="s">
+      <p class="kicker">What's happening</p>
+      <h2>In about a year, AI agents went from <em>suggesting</em> products to <em>paying</em> for them</h2>
+      <div class="body timeline">
+        <div class="ev visa"><time>Apr 2025</time><b>Visa Intelligent Commerce</b><span>Agent-specific card tokens, passkeys and spending limits</span></div>
+        <div class="ev"><time>Sep 2025</time><b>OpenAI Instant Checkout</b><span>Buy inside ChatGPT, built with Stripe on the Agentic Commerce Protocol</span></div>
+        <div class="ev"><time>Sep 2025</time><b>Google AP2</b><span>A protocol for proving an agent is allowed to pay</span></div>
+        <div class="ev visa"><time>Oct 2025</time><b>Visa Trusted Agent Protocol</b><span>With Cloudflare, so merchants can tell good agents from bots</span></div>
+        <div class="ev visa"><time>Apr 2026</time><b>Intelligent Commerce Connect</b><span>One on-ramp that supports the major agent protocols</span></div>
+      </div>
+      <div class="callout"><span class="big">4,700%+</span><p>Growth in AI-driven traffic to US retail sites over one year, reported by Visa in October 2025. Every major player now has a protocol, so the rails are no longer the hard part.</p></div>
+    </div>
+    <p class="src">Gold dots are Visa launches. Sources: Visa newsroom, OpenAI, Google, partner releases.</p>
+    <span class="foot">04</span>
+  </section>
+
+  <!-- 5. Market size -->
+  <section class="slide" aria-label="Market size">
+    <div class="s">
+      <p class="kicker">How big it gets</p>
+      <h2>By 2030, about <em>$190B</em> of US spending could run through AI agents. Roughly half of it on Visa.</h2>
+      <div class="body split">
+        <div class="chart">
+          <svg viewBox="0 0 560 300" role="img" aria-label="Agentic spending in 2030 by scenario: low 83 billion with 38 on Visa, base 190 with 99 on Visa, high 380 with 209 on Visa">
+            <g font-size="13" fill="#5b6283">
+              <line x1="40" x2="560" y1="260" y2="260" stroke="#e1e4f0" stroke-width="2"/>
+              <!-- scale: 400B = 240px -->
+              <rect x="70" y="210.5" width="60" height="49.5" rx="6" fill="#dfe4f7"/>
+              <rect x="140" y="237.3" width="60" height="22.7" rx="6" fill="#1434cb"/>
+              <rect x="250" y="146.1" width="60" height="113.9" rx="6" fill="#dfe4f7"/>
+              <rect x="320" y="200.8" width="60" height="59.2" rx="6" fill="#1434cb"/>
+              <rect x="430" y="32.2" width="60" height="227.8" rx="6" fill="#dfe4f7"/>
+              <rect x="500" y="134.7" width="60" height="125.3" rx="6" fill="#1434cb"/>
+              <g font-weight="700" fill="#1a1f71" font-size="16" text-anchor="middle">
+                <text x="100" y="202">$83B</text><text x="170" y="229">$38B</text>
+                <text x="280" y="138">$190B</text><text x="350" y="193">$99B</text>
+                <text x="460" y="24">$380B</text><text x="530" y="127">$209B</text>
+              </g>
+              <g text-anchor="middle" font-size="14" font-weight="700" fill="#141a3d">
+                <text x="135" y="284">Low</text><text x="315" y="284">Base</text><text x="495" y="284">High</text>
+              </g>
+            </g>
+          </svg>
+          <div class="legend"><span><i style="background:#dfe4f7"></i>US agentic spending</span><span><i style="background:#1434cb"></i>On Visa</span></div>
+        </div>
+        <div class="points">
+          <div class="point"><b>$1.65T</b><span>US e-commerce in 2030, from $1.23T in 2025 at 6% a year</span></div>
+          <div class="point"><b>11.5%</b><span>Base-case agentic share. Matches Morgan Stanley's base and bull cases</span></div>
+          <div class="point"><b>85% × 61%</b><span>Share paid with card credentials, times Visa's share of US card spending</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="src">Model: Kyi_Sin_Thant_Visa_Agentic_Commerce_Model.xlsx. Census (2025 e-commerce), Morgan Stanley (Nov 2025), Nilson (2024 card share).</p>
+    <span class="foot">05</span>
+  </section>
+
+  <!-- 6. Revenue vs position -->
+  <section class="slide dark" aria-label="Revenue versus position">
+    <div class="s">
+      <p class="kicker">What it's worth</p>
+      <h2>The revenue is small. <em>Being the default</em> is what counts.</h2>
+      <div class="body split">
+        <div class="chart">
+          <svg viewBox="0 0 560 250" role="img" aria-label="Visa net revenue from agentic spending in 2030: low 107 million, base 278 million, high 588 million">
+            <g font-size="14">
+              <text x="0" y="40" fill="#fff" font-weight="700">Low</text>
+              <rect x="70" y="24" width="72.7" height="24" rx="5" fill="#f7b600"/>
+              <text x="152" y="42" fill="#fff" font-weight="700">$107M</text>
+              <text x="0" y="110" fill="#fff" font-weight="700">Base</text>
+              <rect x="70" y="94" width="189" height="24" rx="5" fill="#f7b600"/>
+              <text x="269" y="112" fill="#fff" font-weight="700">$278M</text>
+              <text x="0" y="180" fill="#fff" font-weight="700">High</text>
+              <rect x="70" y="164" width="400" height="24" rx="5" fill="#f7b600"/>
+              <text x="480" y="182" fill="#fff" font-weight="700">$588M</text>
+              <text x="70" y="232" fill="#ffffff" fill-opacity=".6" font-size="13">Visa net revenue from US agentic spending, 2030</text>
+            </g>
+          </svg>
+        </div>
+        <div class="points">
+          <div class="point"><b style="color:#fff">0.3% to 1.5%</b><span style="color:rgba(255,255,255,.7)">of Visa's FY2025 net revenue ($40.0B), even in the high case</span></div>
+          <div class="point"><b style="color:#fff">$46M a year</b><span style="color:rgba(255,255,255,.7)">for every 10 points of agentic card share in the base case</span></div>
+          <div class="point"><b style="color:#fff">Every purchase</b><span style="color:rgba(255,255,255,.7)">an agent makes defaults to whichever credential it holds. Losing that slot is the real risk.</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="src">Net revenue yield = FY2025 net revenue / payments volume (0.28%), a global blend used as a rough proxy.</p>
+    <span class="foot">06</span>
+  </section>
+
+  <!-- 7. Trust gap -->
+  <section class="slide" aria-label="The bottleneck is trust">
+    <div class="s">
+      <p class="kicker">What's in the way</p>
+      <h2>People will let an agent shop. They want <em>a limit and a way out.</em></h2>
+      <div class="body split">
+        <div class="bars">
+          <div class="bar-row"><span class="pct">6%</span><div class="track"><span class="fill"><i style="width:6%"></i></span><span class="lbl">would let AI buy automatically without checking in <small>Worldpay, 8 countries, 2025</small></span></div></div>
+          <div class="bar-row"><span class="pct">55%</span><div class="track"><span class="fill"><i style="width:55%"></i></span><span class="lbl">are uncomfortable with agents buying for them <small>Riskified, US and UK, Q1 2026</small></span></div></div>
+          <div class="bar-row"><span class="pct">51%</span><div class="track"><span class="fill"><i style="width:51%"></i></span><span class="lbl">would blame the AI platform when it gets it wrong <small>Riskified, Q1 2026</small></span></div></div>
+          <div class="bar-row gold"><span class="pct">69%</span><div class="track"><span class="fill"><i style="width:69%"></i></span><span class="lbl">would let an agent spend up to $100 on groceries and essentials <small>Global Payments, 2026</small></span></div></div>
+        </div>
+        <div class="insight">
+          <p>Comfort jumps when the purchase is <em>small, routine and capped.</em></p>
+          <span>The pattern in every survey: a hard no to open-ended spending, a clear yes to everyday baskets with a limit. That's where to start.</span>
+        </div>
+      </div>
+    </div>
+    <span class="foot">07</span>
+  </section>
+
+  <!-- 8. Options -->
+  <section class="slide" aria-label="Three ways to play">
+    <div class="s">
+      <p class="kicker">Options</p>
+      <h2>Three ways Visa could play</h2>
+      <div class="body" style="align-content:start">
+        <table>
+          <thead><tr><th>Option</th><th class="c">Builds shopper trust</th><th class="c">Fits Visa's partners</th><th class="c">Uses Visa's data</th><th class="c">Speed to impact</th></tr></thead>
+          <tbody>
+            <tr><td><b>A. Launch a Visa shopping agent</b><span>Compete for the shopper directly</span></td><td class="c"><span class="dot half"></span></td><td class="c"><span class="dot"></span></td><td class="c"><span class="dot half"></span></td><td class="c"><span class="dot"></span></td></tr>
+            <tr><td><b>B. Keep widening the rails</b><span>More protocols and partners. Needed, and already underway</span></td><td class="c"><span class="dot"></span></td><td class="c"><span class="dot full"></span></td><td class="c"><span class="dot half"></span></td><td class="c"><span class="dot full"></span></td></tr>
+            <tr class="rec"><td><b>C. Make control visible to shoppers</b><span>Limits, approvals and fixes where people manage money</span><br><span class="tag-rec">RECOMMENDED</span></td><td class="c"><span class="dot full"></span></td><td class="c"><span class="dot full"></span></td><td class="c"><span class="dot full"></span></td><td class="c"><span class="dot half"></span></td></tr>
+          </tbody>
+        </table>
+        <div class="key"><span><span class="dot full"></span>Strong</span><span><span class="dot half"></span>Partial</span><span><span class="dot"></span>Weak</span><span>Option A competes with the issuers and AI platforms Visa depends on.</span></div>
+      </div>
+    </div>
+    <span class="foot">08</span>
+  </section>
+
+  <!-- 9. Recommendation -->
+  <section class="slide" aria-label="Recommendation">
+    <div class="s">
+      <p class="kicker">Recommendation</p>
+      <h2>Put the controls <em>where people already manage their money</em></h2>
+      <div class="body moves">
+        <div class="move">
+          <span class="num">MOVE 1</span>
+          <h3>An "Agents" screen in every issuer's app</h3>
+          <div class="mock" aria-label="Example of an agent controls screen">
+            <div class="mock-row"><b>ChatGPT</b><span class="lim">$100 / week</span><span class="toggle"></span></div>
+            <div class="mock-row"><b>Grocery agent</b><span class="lim">$75 / order</span><span class="toggle"></span></div>
+            <div class="mock-row"><b>Travel agent</b><span class="lim">Ask me</span><span class="toggle off"></span></div>
+          </div>
+          <p class="why">See every agent using your card, set a limit, approve big buys with a passkey, switch one off in a tap. Built on Visa's agent tokens.</p>
+        </div>
+        <div class="move">
+          <span class="num">MOVE 2</span>
+          <h3>Start with the everyday basket</h3>
+          <p>Launch with groceries and household refills under $100, where 69% of shoppers are already comfortable.</p>
+          <p class="why">Morgan Stanley puts grocery and household goods at 19% of 2030 agentic spending. Small, repeat orders build the habit fastest.</p>
+        </div>
+        <div class="move">
+          <span class="num">MOVE 3</span>
+          <h3>A clear fix when an agent gets it wrong</h3>
+          <p>One dispute path for agent purchases, using Visa's record of what the agent was allowed to buy and what it bought.</p>
+          <p class="why">Half of shoppers would blame the AI platform today. Visa can be the neutral record that settles it.</p>
+        </div>
+      </div>
+    </div>
+    <p class="src">Data &amp; AI team's part: agent-level spending signals, risk scores for issuers, and a consent-first data policy with the Chief Privacy Officer.</p>
+    <span class="foot">09</span>
+  </section>
+
+  <!-- 10. Metrics -->
+  <section class="slide" aria-label="How we'd know it's working">
+    <div class="s">
+      <p class="kicker">How we'd know it's working</p>
+      <h2>A 90-day pilot with <em>four numbers</em> to watch</h2>
+      <div class="body metrics">
+        <div class="metric"><span class="ic">1</span><div><b>Enrollment</b><span>Share of cardholders who add an agent after seeing the controls screen</span></div></div>
+        <div class="metric"><span class="ic">2</span><div><b>Repeat use</b><span>Share who make a second agent purchase within 30 days. The real test of trust</span></div></div>
+        <div class="metric"><span class="ic">3</span><div><b>Hands-off rate</b><span>Purchases completed inside the limit with no manual approval needed</span></div></div>
+        <div class="metric"><span class="ic">4</span><div><b>Dispute rate</b><span>At or below regular online card purchases, or the controls aren't working</span></div></div>
+      </div>
+      <div class="pilot">
+        <div><b>WHO</b>2 digital-first issuers, 1 agent partner</div>
+        <div><b>WHAT</b>Groceries and household refills, under $100</div>
+        <div><b>DECISION</b>Scale if repeat use grows and disputes stay low</div>
+      </div>
+    </div>
+    <span class="foot">10</span>
+  </section>
+
+  <!-- 11. Risks -->
+  <section class="slide" aria-label="Risks">
+    <div class="s">
+      <p class="kicker">Risks and what I'd test first</p>
+      <h2>What could go wrong</h2>
+      <div class="body risks">
+        <div class="risk"><b>Issuers move slowly</b><p>Banking app changes take time. <span>Test:</span> start with two digital-first issuers and a shared design Visa provides.</p></div>
+        <div class="risk"><b>Agents skip cards</b><p>Account-to-account payments or stablecoins could win the agent slot. <span>Test:</span> keep supporting every protocol through Intelligent Commerce Connect.</p></div>
+        <div class="risk"><b>Controls add friction</b><p>Too many prompts and people give up. <span>Test:</span> smart default limits that need no setup, approvals only above the limit.</p></div>
+        <div class="risk"><b>Privacy concerns</b><p>Sharing purchase data with agents can feel invasive. <span>Test:</span> consent-first sharing, written with the Chief Privacy Officer, explained in plain words.</p></div>
+      </div>
+    </div>
+    <span class="foot">11</span>
+  </section>
+
+  <!-- 12. Sources -->
+  <section class="slide" aria-label="Sources and method">
+    <div class="s">
+      <p class="kicker">Sources and method</p>
+      <h2>Where the numbers come from</h2>
+      <div class="body sources">
+        <div><b>US e-commerce, 2025</b>US Census Bureau, Quarterly Retail E-Commerce, Q4 2025: $1,233.7B</div>
+        <div><b>Visa financials</b>Visa FY2025 Form 10-K and Annual Report: $40.0B net revenue, $14.2T payments volume</div>
+        <div><b>Visa card share</b>Nilson Report, Feb 2025: Visa 61.1% of US card spending in 2024</div>
+        <div><b>Agentic forecast</b>Morgan Stanley, reported Nov 29, 2025: ~$190B base, ~$385B bull, 2030</div>
+        <div><b>Consumer trust</b>Worldpay (Aug-Sep 2025), Riskified (Q1 2026), Global Payments (2026) consumer surveys</div>
+        <div><b>Visa agentic products</b>Visa newsroom: Intelligent Commerce (Apr 2025), Trusted Agent Protocol (Oct 2025), Intelligent Commerce Connect (Apr 2026)</div>
+      </div>
+      <p class="method">Method: 2030 e-commerce × agentic share × card credential share × Visa card share × net revenue yield, in three scenarios. Every input and formula is in the Excel model. Survey figures use different questions and samples, so I read them as a pattern, not one number.</p>
+    </div>
+    <span class="foot">12</span>
+  </section>
+
+</main>
+</body>
+</html>

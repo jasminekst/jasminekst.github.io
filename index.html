@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=202611061122">
+<link rel="stylesheet" href="assets/style.css?v=20261106114729">
 </head>
 <body>
 
@@ -61,6 +61,10 @@
   <section class="wrap" id="work" aria-labelledby="work-h">
     <h2 class="section-title" id="work-h">Selected work</h2>
     <div class="cards">
+      <a class="card" href="#visa">
+        <div class="card-art art-gold"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-0"></svg></div>
+        <div class="card-text"><span class="tag">Strategy case</span><h3>Trust Is the New Checkout</h3><p>What Visa should do as AI agents start paying for people.</p></div>
+      </a>
       <a class="card" href="#dashboard">
         <div class="card-art art-blue"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-1"></svg></div>
         <div class="card-text"><span class="tag">Dashboard</span><h3>LA Stay Shortlist</h3><p>Where to stay in LA on a budget, from 43,932 listings.</p></div>
@@ -76,11 +80,41 @@
     </div>
   </section>
 
-  <!-- 1. Dashboard -->
-  <article class="project band" id="dashboard" aria-labelledby="p1">
+  <!-- 1. Visa strategy case -->
+  <article class="project" id="visa" aria-labelledby="p0">
     <div class="wrap">
       <header class="p-head">
         <span class="num">01</span>
+        <div><span class="tag">Strategy case</span><h2 id="p0">Trust Is the New Checkout</h2></div>
+      </header>
+      <div class="p-grid">
+        <div class="p-main">
+          <p class="question">AI assistants have started buying on people's behalf, and Visa has built the rails for it. What would it take for shoppers to actually use them?</p>
+          <ul class="work-list">
+            <li>Sized US agentic spending in 2030 at about $190B in the base case, roughly $99B of it on Visa, using Census, Visa 10-K and Nilson data in a scenario model.</li>
+            <li>Found that the revenue is small, under 1% of Visa's today. What matters is staying the card inside the AI apps where checkout is moving.</li>
+            <li>Pulled four consumer surveys together. Only 6% of shoppers would let an AI buy without checking in, but 69% would let one spend up to $100 on groceries.</li>
+            <li>Recommended putting agent limits and approvals inside the banking apps people already use, starting with everyday baskets, plus a 90-day pilot with four metrics.</li>
+          </ul>
+          <ul class="tools" aria-label="Tools"><li>Market sizing</li><li>Excel scenario model</li><li>Survey synthesis</li><li>Strategy deck</li></ul>
+        </div>
+        <div class="p-side">
+          <figure class="chart">
+            <figcaption>US agentic spending in 2030, by scenario ($B)</figcaption>
+            <div id="chart-visa"></div>
+          </figure>
+          <a class="btn block navy" href="cases/visa-agentic/">View the deck ↗</a>
+          <p class="hint"><a href="cases/visa-agentic/Kyi_Sin_Thant_Trust_Is_the_New_Checkout.pdf">PDF</a> · <a href="cases/visa-agentic/Kyi_Sin_Thant_Visa_Agentic_Commerce_Model.xlsx">Excel model</a> · Independent analysis, not affiliated with Visa</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 2. Dashboard -->
+  <article class="project band" id="dashboard" aria-labelledby="p1">
+    <div class="wrap">
+      <header class="p-head">
+        <span class="num">02</span>
         <div><span class="tag">Dashboard</span><h2 id="p1">LA Stay Shortlist</h2></div>
       </header>
       <div class="p-grid">
@@ -109,7 +143,7 @@
   <article class="project" id="afterchat" aria-labelledby="p2">
     <div class="wrap">
       <header class="p-head">
-        <span class="num">02</span>
+        <span class="num">03</span>
         <div><span class="tag">App build &amp; research</span><h2 id="p2">AfterChat</h2></div>
       </header>
       <div class="p-grid">
@@ -139,7 +173,7 @@
   <article class="project band" id="production" aria-labelledby="p3">
     <div class="wrap">
       <header class="p-head">
-        <span class="num">03</span>
+        <span class="num">04</span>
         <div><span class="tag">Decision model</span><h2 id="p3">Jack's Customs</h2></div>
       </header>
       <div class="p-grid">
@@ -177,8 +211,8 @@
     <h2 class="section-title" id="skills-h">Skills</h2>
     <div class="skills">
       <div><span class="sk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h3>Analysis &amp; BI</h3><p>Python, pandas, Streamlit, Plotly, dashboard design, data cleaning</p></div>
-      <div><span class="sk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><h3>Decision modeling</h3><p>Excel Solver (linear, integer and nonlinear), sensitivity analysis, scenario planning</p></div>
-      <div><span class="sk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.7-3.6 3.4-5.6 6.5-5.6s5.8 2 6.5 5.6"/><path d="M17 4.5a3.5 3.5 0 0 1 0 7M19 14.5c1.6.8 2.6 2.6 2.9 5.5"/></svg></span><h3>Research &amp; strategy</h3><p>Survey design, customer segmentation, feature prioritization, go-to-market planning</p></div>
+      <div><span class="sk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><h3>Decision modeling</h3><p>Excel Solver (linear, integer and nonlinear), market sizing, sensitivity analysis, scenario planning</p></div>
+      <div><span class="sk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.7-3.6 3.4-5.6 6.5-5.6s5.8 2 6.5 5.6"/><path d="M17 4.5a3.5 3.5 0 0 1 0 7M19 14.5c1.6.8 2.6 2.6 2.9 5.5"/></svg></span><h3>Research &amp; strategy</h3><p>Survey design, customer segmentation, competitive research, feature prioritization, strategy decks</p></div>
     </div>
   </section>
 
@@ -201,7 +235,7 @@
 
 </main>
 
-<script src="assets/la-points.js?v=202611061122"></script>
-<script src="assets/site.js?v=202611061122"></script>
+<script src="assets/la-points.js?v=20261106114729"></script>
+<script src="assets/site.js?v=20261106114729"></script>
 </body>
 </html>

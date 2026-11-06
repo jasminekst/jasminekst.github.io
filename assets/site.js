@@ -64,7 +64,10 @@
     if (opts.note) { var p = document.createElement("p"); p.className = "note"; p.textContent = opts.note; host.appendChild(p); }
   }
   function charts() {
-    ["chart-la", "chart-ac", "art-1", "art-2", "art-3"].forEach(function (id) { var n = document.getElementById(id); if (n) n.innerHTML = ""; });
+    ["chart-visa", "chart-la", "chart-ac", "art-0", "art-1", "art-2", "art-3"].forEach(function (id) { var n = document.getElementById(id); if (n) n.innerHTML = ""; });
+    hbar("chart-visa", [["Low", 83], ["Base", 190, 1], ["High", 380]],
+      { color: cssVar("--navy"), track: cssVar("--band"), fmt: function (v) { return "$" + v + "B"; }, max: 400, labelW: 60, label: "US agentic spending in 2030 by scenario",
+        note: "My model. Base and high match Morgan Stanley's 2030 cases. About half runs on Visa." });
     hbar("chart-la", [["Santa Monica", 327], ["West Hollywood", 309], ["Venice", 290], ["Pasadena", 241], ["Long Beach", 222], ["Downtown", 217], ["Hollywood", 171], ["Exposition Park", 48]],
       { color: cssVar("--blue"), track: cssVar("--blue-soft"), fmt: function (v) { return "$" + v; }, label: "Median nightly price by neighborhood",
         note: "Inside Airbnb, Los Angeles snapshot. Excludes listings with no price and flagged high prices." });
@@ -76,6 +79,15 @@
 
   /* ---------- Card thumbnails (small charts from each project's data) ---------- */
   function cardArt() {
+    // 0: trust gap, the four survey figures from the Visa case
+    var a0 = document.getElementById("art-0");
+    if (a0) {
+      [6, 55, 51, 69].forEach(function (n, i) {
+        var h = n / 69 * 84;
+        el("rect", { x: 30 + i * 40, y: 100 - h, width: 24, height: Math.max(h, 3), rx: 4, fill: "currentColor", opacity: i === 3 ? 1 : 0.55 }, a0);
+      });
+      el("line", { x1: 0, x2: 200, y1: 100.5, y2: 100.5, stroke: "currentColor", "stroke-opacity": 0.35 }, a0);
+    }
     // 1: neighborhood median prices as columns
     var a1 = document.getElementById("art-1");
     if (a1) {
