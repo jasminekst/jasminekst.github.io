@@ -3,18 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kyi Sin Thant · Business Analytics Portfolio</title>
-<meta name="description" content="Portfolio of Kyi Sin Thant, M.S. Business Analytics at USC Marshall: dashboards, product strategy and decision models for strategy and business intelligence roles.">
-<meta property="og:title" content="Kyi Sin Thant · Business Analytics Portfolio">
-<meta property="og:description" content="Dashboards, product strategy and decision models for strategy and business intelligence roles.">
+<title>Kyi Sin Thant · Portfolio</title>
+<meta name="description" content="Kyi Sin Thant's portfolio: an LA travel dashboard, the AfterChat product case, and a production model for a small business.">
+<meta property="og:title" content="Kyi Sin Thant · Portfolio">
+<meta property="og:description" content="Analytics projects: dashboards, product research and decision models.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://jasminekst.github.io/">
-<meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0f141c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#101a33">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -34,156 +33,175 @@
 
 <main id="top">
 
-  <!-- Intro -->
-  <section class="intro wrap">
-    <p class="label">Business analytics · Strategy · BI</p>
-    <h1>Kyi Sin Thant</h1>
-    <p class="lede">M.S. Business Analytics candidate at the <strong>USC Marshall School of Business</strong>. I turn business questions into dashboards, decision models and product recommendations that teams can act on.</p>
-    <div class="intro-actions">
-      <a class="btn" href="#work">See projects</a>
-      <a class="btn ghost" href="https://www.linkedin.com/in/jasmine-kyi-sin-thant" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <span class="loc">Los Angeles, CA</span>
+  <!-- Hero: dark band, name + point of view, real LA listings map -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1>Kyi Sin<br><em>Thant</em></h1>
+        <div class="pov">
+          <p>I'm drawn to the moment AI stops being a separate tool and becomes part of how people already work.</p>
+          <p>That means smart defaults, fewer steps, and help that appears at the right time inside the apps people open every day.</p>
+          <p>For large tech platforms, that streamlining leads to more daily use, longer sessions and fewer people dropping off after they sign up.</p>
+          <p>It also produces better data, since every suggestion a user accepts or ignores shows what to build next.</p>
+          <p>I use customer research and analytics to decide which AI features are worth building, then measure whether they actually help.</p>
+        </div>
+        <div class="hero-actions">
+          <a class="btn light" href="#work">See my work</a>
+          <a class="btn outline" href="https://www.linkedin.com/in/jasmine-kyi-sin-thant" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+      <figure class="hero-map">
+        <canvas id="la-map" aria-label="Dot map of Airbnb listings across Los Angeles" role="img"></canvas>
+        <figcaption><span class="dot"></span>3,500 of 43,932 LA Airbnb listings, from my dashboard project</figcaption>
+      </figure>
     </div>
   </section>
 
-  <!-- Project index -->
+  <!-- Project cards -->
   <section class="wrap" id="work" aria-labelledby="work-h">
-    <div class="section-head">
-      <h2 id="work-h">Selected work</h2>
-      <p class="muted">Three projects, each built around a business decision.</p>
+    <h2 class="section-title" id="work-h">Selected work</h2>
+    <div class="cards">
+      <a class="card" href="#dashboard">
+        <div class="card-art art-blue"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-1"></svg></div>
+        <div class="card-text"><span class="tag">Dashboard</span><h3>LA Stay Shortlist</h3><p>Where to stay in LA on a budget, from 43,932 listings.</p></div>
+      </a>
+      <a class="card" href="#afterchat">
+        <div class="card-art art-coral"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-2"></svg></div>
+        <div class="card-text"><span class="tag">Product research</span><h3>AfterChat</h3><p>A follow-up app shaped by a 60-person survey.</p></div>
+      </a>
+      <a class="card" href="#production">
+        <div class="card-art art-teal"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-3"></svg></div>
+        <div class="card-text"><span class="tag">Decision model</span><h3>Jack's Customs</h3><p>A weekly production plan for a small upholstery business.</p></div>
+      </a>
     </div>
-
-    <ol class="index">
-      <li><a href="#dashboard"><span class="i-tag">BI dashboard</span><span class="i-title">LA Stay Shortlist</span><span class="i-sub">Neighborhood shortlist from 43,932 Airbnb listings</span><span class="i-go" aria-hidden="true">→</span></a></li>
-      <li><a href="#afterchat"><span class="i-tag">Product strategy</span><span class="i-title">AfterChat</span><span class="i-sub">Survey-led product case with a working prototype</span><span class="i-go" aria-hidden="true">→</span></a></li>
-      <li><a href="#models"><span class="i-tag">Decision modeling</span><span class="i-title">Spreadsheet decision models</span><span class="i-sub">Nine Excel Solver models for operating and financial decisions</span><span class="i-go" aria-hidden="true">→</span></a></li>
-    </ol>
   </section>
 
   <!-- 1. Dashboard -->
-  <article class="project wrap" id="dashboard" aria-labelledby="p1">
-    <header class="p-head">
-      <p class="label">01 · Business intelligence dashboard</p>
-      <h3 id="p1">LA Stay Shortlist</h3>
-      <p class="meta">USC Marshall, DSO 576 team project · Fall 2026</p>
-    </header>
-    <div class="p-body">
-      <div class="p-main">
-        <p class="question"><span>Decision supported</span>Which Los Angeles neighborhoods and room types should a first-time visitor shortlist for a given nightly budget and stay length?</p>
-        <ul class="work-list">
-          <li>Interactive Streamlit dashboard with budget, stay-length and room-type filters, a neighborhood map, and distance to Downtown, the beach and LAX.</li>
-          <li>Head-to-head view compares two neighborhoods on price, share of listings within budget, and review history.</li>
-          <li>Clear data rules: 5,570 listings with no price stay in counts but are left out of price statistics (never imputed); extreme prices above Q3 + 3×IQR are flagged, not deleted.</li>
-          <li>A methods page explains how every number is calculated and states its limits, such as listed nightly rates excluding fees and taxes.</li>
-        </ul>
+  <article class="project band" id="dashboard" aria-labelledby="p1">
+    <div class="wrap">
+      <header class="p-head">
+        <span class="num">01</span>
+        <div><span class="tag">Dashboard</span><h2 id="p1">LA Stay Shortlist</h2></div>
+      </header>
+      <div class="p-grid">
+        <div class="p-main">
+          <p class="question">Which Los Angeles neighborhoods and room types should a first-time visitor shortlist for their budget and length of stay?</p>
+          <ul class="work-list">
+            <li>Built a Streamlit dashboard where travelers filter by budget, length of stay and room type, then see matching neighborhoods on a map with distances to Downtown, the beach and LAX.</li>
+            <li>Added a side-by-side view to compare two neighborhoods on price, how many places fit the budget, and reviews.</li>
+            <li>Listings without a price still count toward totals but are left out of price averages. Unusually high prices can be hidden with one filter.</li>
+            <li>Wrote a methods page that explains each number and what the data can't tell you, like cleaning fees and taxes.</li>
+          </ul>
+          <ul class="tools" aria-label="Tools"><li>Python</li><li>pandas</li><li>Streamlit</li><li>Plotly</li></ul>
+        </div>
+        <div class="p-side">
+          <figure class="chart">
+            <figcaption>Median nightly price in the 8 largest neighborhoods</figcaption>
+            <div id="chart-la"></div>
+          </figure>
+          <a class="btn block" href="https://project-3qwdutane3pfvjizjpfdpx.streamlit.app/" target="_blank" rel="noopener">Open the live dashboard ↗</a>
+        </div>
       </div>
-      <aside class="p-side">
-        <dl class="stats">
-          <div><dt>Listings analyzed</dt><dd>43,932</dd></div>
-          <div><dt>Neighborhoods</dt><dd>265</dd></div>
-          <div><dt>Dashboard views</dt><dd>3</dd></div>
-        </dl>
-        <a class="btn block" href="https://project-3qwdutane3pfvjizjpfdpx.streamlit.app/" target="_blank" rel="noopener">Open live dashboard ↗</a>
-        <ul class="tools" aria-label="Tools"><li>Python</li><li>pandas</li><li>Streamlit</li><li>Plotly</li></ul>
-      </aside>
     </div>
   </article>
 
   <!-- 2. AfterChat -->
-  <article class="project wrap" id="afterchat" aria-labelledby="p2">
-    <header class="p-head">
-      <p class="label">02 · Product strategy &amp; customer research</p>
-      <h3 id="p2">AfterChat: a coffee chat CRM</h3>
-      <p class="meta">2026 USC Marshall Global MS Business Analytics Case Competition · Team Uno, 6 members</p>
-    </header>
-    <div class="p-body">
-      <div class="p-main">
-        <p class="question"><span>Business question</span>Graduate students network constantly but lose the value of each conversation. What should a follow-up tool actually do, and for whom?</p>
-        <ul class="work-list">
-          <li>Designed and analyzed a 60-person survey: 72% had a coffee chat in the past 3 months, and 38% struggle with timely follow-ups or knowing what to write.</li>
-          <li>Segmented users by networking frequency and chose active networkers (28%, three or more chats) as the early-adopter target.</li>
-          <li>Tied every feature to survey evidence: thank-you drafts, follow-up reminders, AI summaries, an advice library and job alerts linked to contacts.</li>
-          <li>Addressed adoption risks raised by respondents (AI accuracy 27%, privacy 15%) with a pilot, refine, expand rollout.</li>
-        </ul>
+  <article class="project" id="afterchat" aria-labelledby="p2">
+    <div class="wrap">
+      <header class="p-head">
+        <span class="num">02</span>
+        <div><span class="tag">Product research</span><h2 id="p2">AfterChat</h2></div>
+      </header>
+      <div class="p-grid">
+        <div class="p-main">
+          <p class="question">Graduate students network all the time, then forget what was said and miss the follow-up. What should an app for the hours after a coffee chat do?</p>
+          <ul class="work-list">
+            <li>Ran a survey of 60 graduate students. 72% had a coffee chat in the last three months, and 38% struggled to follow up on time or didn't know what to write.</li>
+            <li>Picked active networkers, the 28% with three or more chats, as the first users to win.</li>
+            <li>Chose each feature from a survey result, from thank-you drafts to follow-up reminders and job alerts linked to people you've met.</li>
+            <li>Planned for the two biggest worries, AI accuracy (27%) and privacy (15%), by showing the original note next to every summary and keeping chats private.</li>
+          </ul>
+          <ul class="tools" aria-label="Methods"><li>Survey design</li><li>Segmentation</li><li>Prototyping</li><li>Go-to-market</li></ul>
+        </div>
+        <div class="p-side">
+          <figure class="chart">
+            <figcaption>Biggest challenges after a coffee chat (% of students)</figcaption>
+            <div id="chart-ac"></div>
+          </figure>
+          <a class="btn block coral" href="https://claude.ai/artifact/A8qWUy1sEzq49qgaxUuZnB" target="_blank" rel="noopener">Try the prototype ↗</a>
+          <p class="hint">Loaded with sample contacts. Works best on a phone.</p>
+        </div>
       </div>
-      <aside class="p-side">
-        <dl class="stats">
-          <div><dt>Survey respondents</dt><dd>60</dd></div>
-          <div><dt>Rely on memory</dt><dd>55%</dd></div>
-          <div><dt>Want reminders</dt><dd>48%</dd></div>
-        </dl>
-        <a class="btn block" href="https://claude.ai/artifact/A8qWUy1sEzq49qgaxUuZnB" target="_blank" rel="noopener">Try the prototype ↗</a>
-        <p class="hint">Loaded with sample contacts. Best on a phone.</p>
-        <ul class="tools" aria-label="Methods"><li>Survey design</li><li>Segmentation</li><li>Prototyping</li><li>Go-to-market</li></ul>
-      </aside>
     </div>
   </article>
 
-  <!-- 3. Models -->
-  <article class="project wrap" id="models" aria-labelledby="p3">
-    <header class="p-head">
-      <p class="label">03 · Decision modeling in Excel</p>
-      <h3 id="p3">Spreadsheet decision models</h3>
-      <p class="meta">San Francisco State University, DS 601 in-class models · Spring 2026</p>
-    </header>
-    <p class="question"><span>What these show</span>Translating operating and financial decisions into optimization models, then reading the sensitivity output to explain what drives the answer.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th scope="col">Business decision</th><th scope="col">Model</th><th scope="col">Result</th></tr></thead>
-        <tbody>
-          <tr><td>Product mix under pump, labor and tubing limits</td><td>Linear program + sensitivity</td><td>118 / 76 units for $64,100 profit; found the price range where the mix holds</td></tr>
-          <tr><td>Pricing with volume discounts</td><td>Mixed-integer, binary switches</td><td>Optimal plan with discount tiers: $67,975 profit</td></tr>
-          <tr><td>Advertising budget, TV vs. magazine</td><td>Linear program</td><td>10 TV + 25 magazine spots within a $100K budget; $775K projected profit</td></tr>
-          <tr><td>Bond portfolio with diversification and rating rules</td><td>Linear program</td><td>$750K across 6 bonds for a $68.9K annual return (9.2%)</td></tr>
-          <tr><td>Six-month production and inventory plan</td><td>Multi-period linear program</td><td>Meets all demand within capacity at $5.77M total cost</td></tr>
-          <tr><td>Distribution network routing</td><td>Transportation &amp; transshipment</td><td>Lowest-cost flows across 7 sites for $22,350</td></tr>
-          <tr><td>Weekly staff scheduling</td><td>Integer program</td><td>Covers every day's staffing need for $22,540 in weekly wages</td></tr>
-          <tr><td>Capital project selection</td><td>Binary integer program</td><td>Picks 3 of 6 projects for the highest NPV within 5 years of capital limits</td></tr>
-          <tr><td>Facility location and route risk</td><td>Nonlinear &amp; network models</td><td>Tower site minimizing the farthest distance; safest LA to Amarillo route (99% safe)</td></tr>
-        </tbody>
-      </table>
+  <!-- 3. Jack's Customs -->
+  <article class="project band" id="production" aria-labelledby="p3">
+    <div class="wrap">
+      <header class="p-head">
+        <span class="num">03</span>
+        <div><span class="tag">Decision model</span><h2 id="p3">Jack's Customs</h2></div>
+      </header>
+      <div class="p-grid">
+        <div class="p-main">
+          <p class="question">How many pillows, aprons and bundles should a one-person Berkeley upholstery business make each week to earn the most from 42 hours and limited materials?</p>
+          <ul class="work-list">
+            <li>Interviewed the owner and priced every material from supplier rolls to build a cost for each product.</li>
+            <li>Built an integer programming model in Excel Solver. The best plan is 24 pillows, 8 aprons and 5 bundles, for $750.56 profit a week.</li>
+            <li>Piping is what limits profit. Each extra yard adds about $7.70 a week, while extra hours on their own add nothing, so we recommended buying piping in bulk.</li>
+            <li>Suggested simple sales tracking so the model can be re-run each quarter with real demand.</li>
+          </ul>
+          <ul class="tools" aria-label="Tools"><li>Excel Solver</li><li>Integer programming</li><li>Sensitivity analysis</li><li>Client interviews</li></ul>
+        </div>
+        <div class="p-side">
+          <div class="whatif" id="whatif">
+            <p class="whatif-title">Try the model</p>
+            <label for="w-labor">Labor hours per week <output id="o-labor">42</output></label>
+            <input type="range" id="w-labor" min="30" max="60" step="1" value="42">
+            <label for="w-piping">Piping available (yards) <output id="o-piping">110</output></label>
+            <input type="range" id="w-piping" min="80" max="160" step="5" value="110">
+            <div class="whatif-out">
+              <div class="profit"><span>Weekly profit</span><b id="w-profit">$750.56</b><small id="w-delta">Baseline plan</small></div>
+              <div id="w-mix" class="mix"></div>
+              <p class="limit" id="w-limit"></p>
+            </div>
+            <button type="button" class="reset" id="w-reset">Reset to the real limits</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <ul class="tools" aria-label="Tools"><li>Excel Solver</li><li>Simplex LP</li><li>GRG Nonlinear</li><li>Integer &amp; binary</li><li>Sensitivity analysis</li><li>Data tables</li></ul>
   </article>
 
   <!-- Skills -->
   <section class="wrap" id="skills" aria-labelledby="skills-h">
-    <div class="section-head">
-      <h2 id="skills-h">Skills</h2>
-      <p class="muted">Grouped by the kind of question they answer.</p>
-    </div>
+    <h2 class="section-title" id="skills-h">Skills</h2>
     <div class="skills">
-      <div><h4>Analysis &amp; BI</h4><p>Python, pandas, Streamlit, Plotly, dashboard design, data cleaning rules</p></div>
-      <div><h4>Decision modeling</h4><p>Excel Solver (LP, integer, nonlinear), sensitivity analysis, scenario and data tables</p></div>
-      <div><h4>Strategy &amp; research</h4><p>Survey design, customer segmentation, product prioritization, go-to-market planning</p></div>
+      <div><span class="sk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h3>Analysis &amp; BI</h3><p>Python, pandas, Streamlit, Plotly, dashboard design, data cleaning</p></div>
+      <div><span class="sk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><h3>Decision modeling</h3><p>Excel Solver (linear, integer and nonlinear), sensitivity analysis, scenario planning</p></div>
+      <div><span class="sk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.7-3.6 3.4-5.6 6.5-5.6s5.8 2 6.5 5.6"/><path d="M17 4.5a3.5 3.5 0 0 1 0 7M19 14.5c1.6.8 2.6 2.6 2.9 5.5"/></svg></span><h3>Research &amp; strategy</h3><p>Survey design, customer segmentation, feature prioritization, go-to-market planning</p></div>
     </div>
   </section>
 
   <!-- Contact -->
-  <section class="wrap contact" id="contact" aria-labelledby="contact-h">
-    <h2 id="contact-h">Let's talk</h2>
-    <p class="muted">Open to strategy, business analytics and business intelligence roles.</p>
-    <div class="contact-row">
-      <a class="btn" href="mailto:kthant@marshall.usc.edu">kthant@marshall.usc.edu</a>
-      <button class="btn ghost" type="button" id="copy-email" data-email="kthant@marshall.usc.edu">Copy email</button>
-      <a class="btn ghost" href="https://www.linkedin.com/in/jasmine-kyi-sin-thant" target="_blank" rel="noopener">LinkedIn ↗</a>
+  <section class="contact" id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <h2 id="contact-h">Let's talk.</h2>
+      <p>Open to strategy, business analytics and business intelligence roles.</p>
+      <div class="contact-row">
+        <a class="btn light" href="mailto:kthant@marshall.usc.edu">kthant@marshall.usc.edu</a>
+        <button class="btn outline" type="button" id="copy-email" data-email="kthant@marshall.usc.edu">Copy email</button>
+        <a class="btn outline" href="https://www.linkedin.com/in/jasmine-kyi-sin-thant" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+      <div class="foot">
+        <span>© 2026 Kyi Sin Thant · Los Angeles</span>
+        <a href="#top">Back to top ↑</a>
+      </div>
     </div>
   </section>
 
 </main>
 
-<footer class="wrap foot">
-  <span>© 2026 Kyi Sin Thant</span>
-  <a href="#top">Back to top ↑</a>
-</footer>
-
-<script>
-document.getElementById("copy-email").addEventListener("click", function () {
-  var btn = this, email = btn.dataset.email;
-  function done(msg) { btn.textContent = msg; setTimeout(function () { btn.textContent = "Copy email"; }, 1800); }
-  if (navigator.clipboard) navigator.clipboard.writeText(email).then(function () { done("Copied"); }, function () { done(email); });
-  else done(email);
-});
-</script>
+<script src="assets/la-points.js"></script>
+<script src="assets/site.js"></script>
 </body>
 </html>
