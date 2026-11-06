@@ -7,3 +7,5 @@ Live at https://jasminekst.github.io (GitHub Pages, deploys from `main`).
 - Plain HTML/CSS, no build step. Push to `main` and the site updates in about a minute.
 
 Preview locally: `python3 -m http.server 8000`, then open http://localhost:8000.
+
+After changing CSS/JS, bump the `?v=` stamp on the asset links in `index.html` so browsers fetch the new files instead of a cached copy (GitHub Pages caches for 10 minutes).
