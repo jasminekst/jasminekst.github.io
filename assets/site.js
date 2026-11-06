@@ -7,45 +7,111 @@
     if (parent) parent.appendChild(e);
     return e;
   }
-  function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function cssVar(name, elId) { var e = elId ? document.getElementById(elId) : document.documentElement; return getComputedStyle(e || document.documentElement).getPropertyValue(name).trim(); }
 
-  /* ---------- Hero: LA listings dot map (real sampled coordinates) ---------- */
-  var canvas = document.getElementById("la-map");
-  var PLACES = [["Downtown", 34.047, -118.25], ["Santa Monica", 34.019, -118.49], ["Long Beach", 33.77, -118.19], ["Pasadena", 34.147, -118.14]];
-  function drawMap() {
-    var pts = window.LA_POINTS || [];
-    if (!canvas || !pts.length) return;
+  /* ---------- Hero: shimmering data scene (charts, a platform network, AI sparkles) ---------- */
+  var canvas = document.getElementById("hero-art");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var GOLD = [242, 184, 75], BLUE = [126, 162, 255], WHITE = [238, 242, 251];
+  var rgba = function (c, a) { return "rgba(" + c[0] + "," + c[1] + "," + c[2] + "," + a + ")"; };
+  var seed = 7, rnd = function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  // operations network: three hubs joined by curved routes, each serving its own cluster of points
+  var NODES = [
+    { x: 0.27, y: 0.25, r: 4.2, hub: 1 }, { x: 0.61, y: 0.15, r: 3.8, hub: 1 }, { x: 0.76, y: 0.38, r: 4.0, hub: 1 },
+    { x: 0.11, y: 0.15, r: 1.9 }, { x: 0.09, y: 0.33, r: 1.7 }, { x: 0.20, y: 0.44, r: 2.1 }, { x: 0.38, y: 0.40, r: 1.8 }, { x: 0.37, y: 0.09, r: 2.0 },
+    { x: 0.49, y: 0.05, r: 1.7 }, { x: 0.75, y: 0.06, r: 2.0 }, { x: 0.88, y: 0.18, r: 1.8 }, { x: 0.50, y: 0.27, r: 1.6 },
+    { x: 0.92, y: 0.33, r: 1.9 }, { x: 0.62, y: 0.47, r: 1.8 }, { x: 0.85, y: 0.49, r: 1.7 }
+  ];
+  var LINKS = [[0, 1, 1], [1, 2, 1], [0, 2, 1],
+    [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [1, 7], [1, 8], [1, 9], [1, 10], [1, 11], [2, 10], [2, 12], [2, 13], [2, 14], [11, 6]];
+  NODES.forEach(function (d, i) { d.p = i * 0.9; d.x0 = d.x; d.y0 = d.y; });
+  function bend(a, b) { // control point for a gentle arc between two hubs
+    var mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2, dx = b.x - a.x, dy = b.y - a.y;
+    return { x: mx - dy * 0.35, y: my + dx * 0.35 };
+  }
+  // sparkles: four-point stars that twinkle
+  var SPARKS = [];
+  for (var q = 0; q < 14; q++) SPARKS.push({ x: rnd(), y: rnd() * 0.95, s: 3 + rnd() * 6, p: rnd() * 6.28, v: 0.6 + rnd() * 1.2 });
+  // analytics: three flowing series drawn as particle streams
+  var SERIES = [
+    { c: GOLD, base: 0.62, amp: 0.07, f: 2.1, sp: 0.35, a: 0.95 },
+    { c: BLUE, base: 0.72, amp: 0.05, f: 3.3, sp: -0.25, a: 0.75 },
+    { c: WHITE, base: 0.82, amp: 0.035, f: 4.6, sp: 0.18, a: 0.45 }
+  ];
+  function star(ctx, x, y, s, a) {
+    ctx.fillStyle = rgba(GOLD, a);
+    ctx.beginPath();
+    ctx.moveTo(x, y - s); ctx.quadraticCurveTo(x, y, x + s, y); ctx.quadraticCurveTo(x, y, x, y + s);
+    ctx.quadraticCurveTo(x, y, x - s, y); ctx.quadraticCurveTo(x, y, x, y - s); ctx.fill();
+  }
+  function frame(t) {
+    if (!canvas) return;
     var size = canvas.clientWidth, dpr = window.devicePixelRatio || 1;
-    canvas.width = size * dpr; canvas.height = size * dpr;
-    var ctx = canvas.getContext("2d");
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, size, size);
-    // focus on the dense core; a few outlying points simply fall outside
-    var latMin = 33.70, latMax = 34.32, lonMin = -118.72, lonMax = -117.98;
-    var k = Math.cos(34 * Math.PI / 180);
-    var w = (lonMax - lonMin) * k, h = latMax - latMin, s = (size - 24) / Math.max(w, h);
-    var ox = (size - w * s) / 2, oy = (size - h * s) / 2;
-    var X = function (lon) { return ox + (lon - lonMin) * k * s; };
-    var Y = function (lat) { return oy + (latMax - lat) * s; };
+    if (canvas.width !== Math.round(size * dpr)) { canvas.width = Math.round(size * dpr); canvas.height = Math.round(size * dpr); }
+    var ctx = canvas.getContext("2d"); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, size, size);
+    var T = t / 1000;
+    // faint chart grid
+    ctx.strokeStyle = rgba(WHITE, 0.06); ctx.lineWidth = 1;
+    for (var g = 1; g < 8; g++) { var gy = size * g / 8; ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(size, gy); ctx.stroke(); }
+    // network links and nodes
+    NODES.forEach(function (d) { // a slow drift so the network feels alive
+      d.x = d.x0 + (reduce ? 0 : 0.006 * Math.sin(T * 0.5 + d.p)); d.y = d.y0 + (reduce ? 0 : 0.006 * Math.cos(T * 0.4 + d.p));
+    });
+    LINKS.forEach(function (l, li) {
+      var a = NODES[l[0]], b = NODES[l[1]], m = (T * (l[2] ? 0.18 : 0.3) + li * 0.17) % 1, px, py;
+      if (l[2]) {
+        var c = bend(a, b);
+        ctx.strokeStyle = rgba(GOLD, 0.35); ctx.lineWidth = 1.3; ctx.setLineDash([3, 4]);
+        ctx.beginPath(); ctx.moveTo(a.x * size, a.y * size); ctx.quadraticCurveTo(c.x * size, c.y * size, b.x * size, b.y * size); ctx.stroke(); ctx.setLineDash([]);
+        px = (1 - m) * (1 - m) * a.x + 2 * (1 - m) * m * c.x + m * m * b.x; py = (1 - m) * (1 - m) * a.y + 2 * (1 - m) * m * c.y + m * m * b.y;
+        ctx.fillStyle = rgba(GOLD, 0.9); ctx.beginPath(); ctx.arc(px * size, py * size, 2.2, 0, 6.283); ctx.fill();
+      } else {
+        ctx.strokeStyle = rgba(BLUE, 0.2); ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(a.x * size, a.y * size); ctx.lineTo(b.x * size, b.y * size); ctx.stroke();
+        px = a.x + (b.x - a.x) * m; py = a.y + (b.y - a.y) * m;
+        ctx.fillStyle = rgba(WHITE, 0.45); ctx.beginPath(); ctx.arc(px * size, py * size, 1.1, 0, 6.283); ctx.fill();
+      }
+    });
+    NODES.forEach(function (d) {
+      var glow = 0.55 + 0.45 * Math.sin(T * 1.3 + d.p);
+      if (d.hub) {
+        ctx.strokeStyle = rgba(GOLD, 0.35 * glow); ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.arc(d.x * size, d.y * size, d.r * 3.2, 0, 6.283); ctx.stroke();
+      }
+      ctx.fillStyle = rgba(d.hub ? GOLD : BLUE, (d.hub ? 0.16 : 0.12) * glow); ctx.beginPath(); ctx.arc(d.x * size, d.y * size, d.r * 4, 0, 6.283); ctx.fill();
+      ctx.fillStyle = d.hub ? rgba(GOLD, 0.95) : rgba(WHITE, 0.55 + 0.4 * glow); ctx.beginPath(); ctx.arc(d.x * size, d.y * size, d.r, 0, 6.283); ctx.fill();
+    });
+    // flowing series made of shimmering dots
     ctx.globalCompositeOperation = "lighter";
-    ctx.fillStyle = "rgba(242, 184, 75, 0.42)";
-    for (var i = 0; i < pts.length; i++) {
-      var x = X(pts[i][1]), y = Y(pts[i][0]);
-      if (x < 0 || y < 0 || x > size || y > size) continue;
-      ctx.beginPath(); ctx.arc(x, y, size > 380 ? 1.7 : 1.3, 0, 6.283); ctx.fill();
+    SERIES.forEach(function (sr, si) {
+      for (var i = 0; i <= 120; i++) {
+        var u = i / 120, x = u * size;
+        var y = (sr.base - sr.amp * Math.sin(u * sr.f * 3.14 + T * sr.sp) - 0.05 * u * (si === 0 ? 1 : 0.4)) * size;
+        var tw = 0.45 + 0.55 * Math.abs(Math.sin(i * 0.7 + T * 2.2 + si));
+        ctx.fillStyle = rgba(sr.c, sr.a * tw); ctx.beginPath(); ctx.arc(x, y, si === 0 ? 1.8 : 1.3, 0, 6.283); ctx.fill();
+      }
+    });
+    // rising bars made of dots along the bottom
+    for (var bi = 0; bi < 9; bi++) {
+      var bx = size * (0.12 + bi * 0.095), h = 3 + Math.round(4 + 3 * Math.sin(T * 0.6 + bi * 0.9) + bi * 0.5);
+      for (var k = 0; k < h; k++) { ctx.fillStyle = rgba(bi % 3 === 0 ? GOLD : BLUE, 0.22 + k / h * 0.4); ctx.fillRect(bx, size * 0.98 - k * size * 0.016, size * 0.03, size * 0.009); }
     }
     ctx.globalCompositeOperation = "source-over";
-    ctx.font = "500 12px 'IBM Plex Mono', monospace";
-    PLACES.forEach(function (p) {
-      var x = X(p[2]), y = Y(p[1]);
-      ctx.fillStyle = "#eef2fb"; ctx.beginPath(); ctx.arc(x, y, 3, 0, 6.283); ctx.fill();
-      ctx.fillStyle = "rgba(238, 242, 251, 0.85)";
-      ctx.fillText(p[0], x + 7, y + 4);
+    // AI sparkles
+    SPARKS.forEach(function (sp) {
+      var a = Math.max(0, Math.sin(T * sp.v + sp.p)); if (a > 0.05) star(ctx, sp.x * size, sp.y * size, sp.s * (0.6 + 0.4 * a), 0.85 * a);
     });
   }
-  drawMap();
-  var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(drawMap, 120); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawMap);
+  var running = false, visible = true;
+  function loop(t) { frame(t); if (running) requestAnimationFrame(loop); }
+  function start() { if (reduce) { frame(4000); return; } if (!running && visible && !document.hidden) { running = true; requestAnimationFrame(loop); } }
+  function stop() { running = false; }
+  if (canvas) {
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; visible ? start() : stop(); }).observe(canvas);
+    document.addEventListener("visibilitychange", function () { document.hidden ? stop() : start(); });
+    window.addEventListener("resize", function () { if (reduce) frame(4000); });
+    start();
+  }
 
   /* ---------- Horizontal bar chart ---------- */
   function hbar(id, rows, opts) {
@@ -66,56 +132,49 @@
   function charts() {
     ["chart-visa", "chart-la", "chart-ac", "art-0", "art-1", "art-2", "art-3"].forEach(function (id) { var n = document.getElementById(id); if (n) n.innerHTML = ""; });
     hbar("chart-visa", [["Low", 83], ["Base", 190, 1], ["High", 380]],
-      { color: cssVar("--navy"), track: cssVar("--band"), fmt: function (v) { return "$" + v + "B"; }, max: 400, labelW: 60, label: "US agentic spending in 2030 by scenario",
+      { color: cssVar("--acc", "visa"), track: cssVar("--acc-soft", "visa"), fmt: function (v) { return "$" + v + "B"; }, max: 400, labelW: 60, label: "US agentic spending in 2030 by scenario",
         note: "My model. Base and high match Morgan Stanley's 2030 cases. About half runs on Visa." });
     hbar("chart-la", [["Santa Monica", 327], ["West Hollywood", 309], ["Venice", 290], ["Pasadena", 241], ["Long Beach", 222], ["Downtown", 217], ["Hollywood", 171], ["Exposition Park", 48]],
-      { color: cssVar("--blue"), track: cssVar("--blue-soft"), fmt: function (v) { return "$" + v; }, label: "Median nightly price by neighborhood",
+      { color: cssVar("--acc", "dashboard"), track: cssVar("--acc-soft", "dashboard"), fmt: function (v) { return "$" + v; }, label: "Median nightly price by neighborhood",
         note: "Inside Airbnb, Los Angeles snapshot. Excludes listings with no price and flagged high prices." });
     hbar("chart-ac", [["Delay the follow-up", 38], ["Unsure what to write", 38], ["Forget details", 35], ["Forget advice", 28], ["Lose track of intros", 23]],
-      { color: cssVar("--coral"), track: cssVar("--coral-soft"), fmt: function (v) { return v + "%"; }, max: 50, labelW: 150, label: "Biggest challenges after a coffee chat",
+      { color: cssVar("--acc", "afterchat"), track: cssVar("--acc-soft", "afterchat"), fmt: function (v) { return v + "%"; }, max: 50, labelW: 150, label: "Biggest challenges after a coffee chat",
         note: "Survey of 60 graduate students. Select all that apply." });
     cardArt();
   }
 
-  /* ---------- Card thumbnails (small charts from each project's data) ---------- */
+  /* ---------- Card thumbnails: one small illustration per project ---------- */
+  var ART = {
+    // Visa case: a payment card with chip and contactless mark, plus an AI sparkle
+    "art-0": '<rect x="62" y="30" width="92" height="58" rx="8" fill="currentColor" opacity=".25"/>' +
+      '<rect x="48" y="20" width="92" height="58" rx="8" fill="currentColor"/>' +
+      '<rect x="60" y="38" width="17" height="13" rx="2.5" style="fill:var(--acc-2)"/>' +
+      '<g fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M113 38 a7 7 0 0 1 0 11"/><path d="M118 34 a12 12 0 0 1 0 19"/><path d="M123 30 a17 17 0 0 1 0 27"/></g>' +
+      '<rect x="60" y="62" width="34" height="4" rx="2" fill="#fff" opacity=".75"/><rect x="99" y="62" width="14" height="4" rx="2" fill="#fff" opacity=".75"/>' +
+      '<path d="M160 12 l3.5 9 9 3.5 -9 3.5 -3.5 9 -3.5 -9 -9 -3.5 9 -3.5 z" style="fill:var(--acc-2)"/>',
+    // LA Stay: a simple map of the LA coast with three pins
+    "art-1": '<path d="M0 0 H200 V96 C170 92 150 88 128 84 C112 82 98 90 86 92 C74 94 62 90 60 82 C58 74 66 68 70 60 C74 50 66 40 54 36 C36 30 18 30 0 28 Z" fill="currentColor" opacity=".16"/>' +
+      '<path d="M0 28 C18 30 36 30 54 36 C66 40 74 50 70 60 C66 68 58 74 60 82 C62 90 74 94 86 92 C98 90 112 82 128 84 C150 88 170 92 200 96" fill="none" stroke="currentColor" stroke-width="2.2"/>' +
+      '<g fill="none" stroke="currentColor" stroke-width="1.6" opacity=".45" stroke-linecap="round"><path d="M72 52 C100 48 140 46 200 42"/><path d="M78 30 C92 50 100 70 104 88"/><path d="M118 4 C120 30 122 60 126 82"/></g>' +
+      '<g fill="currentColor"><path d="M74 52 c0-6 9-6 9 0 c0 4 -4.5 9 -4.5 9 s-4.5-5 -4.5-9z"/><path d="M116 42 c0-7 11-7 11 0 c0 5 -5.5 11 -5.5 11 s-5.5-6 -5.5-11z"/><path d="M127 75 c0-6 9-6 9 0 c0 4 -4.5 9 -4.5 9 s-4.5-5 -4.5-9z"/></g>' +
+      '<g fill="#fff"><circle cx="78.5" cy="52" r="1.8"/><circle cx="121.5" cy="42" r="2.2"/><circle cx="131.5" cy="75" r="1.8"/></g>',
+    // AfterChat: a cute coffee cup on a saucer
+    "art-2": '<ellipse cx="98" cy="92" rx="44" ry="7" style="fill:var(--acc-2)"/>' +
+      '<g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".45"><path d="M88 30 c-6 -6 6 -10 0 -17"/><path d="M104 30 c-6 -6 6 -10 0 -17"/></g>' +
+      '<path d="M126 48 a12 12 0 1 1 -3 24" fill="none" stroke="currentColor" stroke-width="6"/>' +
+      '<path d="M68 38 H128 L122 80 A9 9 0 0 1 113 88 H83 A9 9 0 0 1 74 80 Z" fill="currentColor"/>' +
+      '<g fill="#fff"><circle cx="89" cy="58" r="2.6"/><circle cx="107" cy="58" r="2.6"/></g>' +
+      '<path d="M92 66 q6 5 12 0" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>' +
+      '<g style="fill:var(--acc-2)" opacity=".85"><circle cx="83" cy="65" r="3.2"/><circle cx="113" cy="65" r="3.2"/></g>',
+    // Jack's Customs: a stitched pillow with a needle and thread
+    "art-3": '<path d="M52 24 Q100 14 148 24 Q158 55 148 86 Q100 96 52 86 Q42 55 52 24 Z" fill="currentColor"/>' +
+      '<path d="M62 33 Q100 25 138 33 Q146 55 138 77 Q100 85 62 77 Q54 55 62 33 Z" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="5 4" opacity=".85"/>' +
+      '<circle cx="100" cy="55" r="7" fill="#fff" opacity=".9"/><g fill="currentColor"><circle cx="97.5" cy="55" r="1.4"/><circle cx="102.5" cy="55" r="1.4"/></g>' +
+      '<path d="M148 24 C162 30 170 18 182 12" fill="none" stroke="currentColor" stroke-width="1.8" opacity=".6"/>' +
+      '<path d="M176 15 L194 5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cx="191.5" cy="6.5" r="1.4" fill="none" stroke="currentColor" stroke-width="1"/>'
+  };
   function cardArt() {
-    // 0: trust gap, the four survey figures from the Visa case
-    var a0 = document.getElementById("art-0");
-    if (a0) {
-      [6, 55, 51, 69].forEach(function (n, i) {
-        var h = n / 69 * 84;
-        el("rect", { x: 30 + i * 40, y: 100 - h, width: 24, height: Math.max(h, 3), rx: 4, fill: "currentColor", opacity: i === 3 ? 1 : 0.55 }, a0);
-      });
-      el("line", { x1: 0, x2: 200, y1: 100.5, y2: 100.5, stroke: "currentColor", "stroke-opacity": 0.35 }, a0);
-    }
-    // 1: neighborhood median prices as columns
-    var a1 = document.getElementById("art-1");
-    if (a1) {
-      var v = [327, 309, 290, 241, 222, 217, 171, 48];
-      v.forEach(function (n, i) { var h = n / 327 * 88; el("rect", { x: 8 + i * 24, y: 100 - h, width: 16, height: h, rx: 3, fill: "currentColor", opacity: i === 0 ? 1 : 0.55 }, a1); });
-      el("line", { x1: 0, x2: 200, y1: 100.5, y2: 100.5, stroke: "currentColor", "stroke-opacity": 0.35 }, a1);
-    }
-    // 2: coffee chats in the last 3 months (survey distribution)
-    var a2 = document.getElementById("art-2");
-    if (a2) {
-      var d = [28, 44, 23, 2, 3];
-      d.forEach(function (n, i) { var h = n / 44 * 84; el("rect", { x: 14 + i * 36, y: 100 - h, width: 26, height: Math.max(h, 2), rx: 4, fill: "currentColor", opacity: i === 1 ? 1 : 0.5 }, a2); });
-      el("line", { x1: 0, x2: 200, y1: 100.5, y2: 100.5, stroke: "currentColor", "stroke-opacity": 0.35 }, a2);
-    }
-    // 3: weekly profit as piping supply rises (from the model)
-    var a3 = document.getElementById("art-3");
-    if (a3) {
-      var xs = [], pts = [];
-      for (var p = 80; p <= 160; p += 5) xs.push(p);
-      var prof = xs.map(function (p) { return solve(42, p).profit; });
-      var lo = Math.min.apply(null, prof), hi = Math.max.apply(null, prof);
-      xs.forEach(function (p, i) { pts.push((6 + i * (188 / (xs.length - 1))).toFixed(1) + "," + (96 - (prof[i] - lo) / (hi - lo) * 80).toFixed(1)); });
-      el("polyline", { points: "6,100 " + pts.join(" ") + " 194,100", fill: "currentColor", opacity: 0.16 }, a3);
-      el("polyline", { points: pts.join(" "), fill: "none", stroke: "currentColor", "stroke-width": 3, "stroke-linejoin": "round", "stroke-linecap": "round" }, a3);
-      var bi = xs.indexOf(110), bp = pts[bi].split(",");
-      el("circle", { cx: bp[0], cy: bp[1], r: 5, fill: "currentColor" }, a3);
-      el("line", { x1: 0, x2: 200, y1: 100.5, y2: 100.5, stroke: "currentColor", "stroke-opacity": 0.35 }, a3);
-    }
+    Object.keys(ART).forEach(function (id) { var n = document.getElementById(id); if (n) n.innerHTML = ART[id]; });
   }
 
   /* ---------- Jack's Customs integer program (same inputs as the Excel model) ---------- */

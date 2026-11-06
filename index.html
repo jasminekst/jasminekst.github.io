@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=20261106114729">
+<link rel="stylesheet" href="assets/style.css?v=20261106140836">
 </head>
 <body>
 
@@ -50,10 +50,7 @@
           <a class="btn outline" href="https://www.linkedin.com/in/jasmine-kyi-sin-thant" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </div>
-      <figure class="hero-map">
-        <canvas id="la-map" aria-label="Dot map of Airbnb listings across Los Angeles" role="img"></canvas>
-        <figcaption><span class="dot"></span>3,500 of 43,932 LA Airbnb listings, from my dashboard project</figcaption>
-      </figure>
+      <div class="hero-map" aria-hidden="true"><canvas id="hero-art"></canvas></div>
     </div>
   </section>
 
@@ -61,27 +58,27 @@
   <section class="wrap" id="work" aria-labelledby="work-h">
     <h2 class="section-title" id="work-h">Selected work</h2>
     <div class="cards">
-      <a class="card" href="#visa">
-        <div class="card-art art-gold"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-0"></svg></div>
+      <a class="card p-visa" href="#visa">
+        <div class="card-art"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-0"></svg></div>
         <div class="card-text"><span class="tag">Strategy case</span><h3>Trust Is the New Checkout</h3><p>What Visa should do as AI agents start paying for people.</p></div>
       </a>
-      <a class="card" href="#dashboard">
-        <div class="card-art art-blue"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-1"></svg></div>
+      <a class="card p-air" href="#dashboard">
+        <div class="card-art"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-1"></svg></div>
         <div class="card-text"><span class="tag">Dashboard</span><h3>LA Stay Shortlist</h3><p>Where to stay in LA on a budget, from 43,932 listings.</p></div>
       </a>
-      <a class="card" href="#afterchat">
-        <div class="card-art art-coral"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-2"></svg></div>
+      <a class="card p-ac" href="#afterchat">
+        <div class="card-art"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-2"></svg></div>
         <div class="card-text"><span class="tag">App build &amp; research</span><h3>AfterChat</h3><p>A working app for the follow-up after a coffee chat, shaped by a 60-person survey.</p></div>
       </a>
-      <a class="card" href="#production">
-        <div class="card-art art-teal"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-3"></svg></div>
+      <a class="card p-jc" href="#production">
+        <div class="card-art"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-3"></svg></div>
         <div class="card-text"><span class="tag">Decision model</span><h3>Jack's Customs</h3><p>A weekly production plan for a small upholstery business.</p></div>
       </a>
     </div>
   </section>
 
   <!-- 1. Visa strategy case -->
-  <article class="project" id="visa" aria-labelledby="p0">
+  <article class="project p-visa" id="visa" aria-labelledby="p0">
     <div class="wrap">
       <header class="p-head">
         <span class="num">01</span>
@@ -103,7 +100,7 @@
             <figcaption>US agentic spending in 2030, by scenario ($B)</figcaption>
             <div id="chart-visa"></div>
           </figure>
-          <a class="btn block navy" href="cases/visa-agentic/">View the deck ↗</a>
+          <a class="btn block" href="cases/visa-agentic/">View the deck ↗</a>
           <p class="hint"><a href="cases/visa-agentic/Kyi_Sin_Thant_Trust_Is_the_New_Checkout.pdf">PDF</a> · <a href="cases/visa-agentic/Kyi_Sin_Thant_Visa_Agentic_Commerce_Model.xlsx">Excel model</a></p>
         </div>
       </div>
@@ -111,7 +108,7 @@
   </article>
 
   <!-- 2. Dashboard -->
-  <article class="project band" id="dashboard" aria-labelledby="p1">
+  <article class="project band p-air" id="dashboard" aria-labelledby="p1">
     <div class="wrap">
       <header class="p-head">
         <span class="num">02</span>
@@ -140,7 +137,7 @@
   </article>
 
   <!-- 2. AfterChat -->
-  <article class="project" id="afterchat" aria-labelledby="p2">
+  <article class="project p-ac" id="afterchat" aria-labelledby="p2">
     <div class="wrap">
       <header class="p-head">
         <span class="num">03</span>
@@ -162,7 +159,7 @@
             <figcaption>Biggest challenges after a coffee chat (% of students)</figcaption>
             <div id="chart-ac"></div>
           </figure>
-          <a class="btn block coral" href="https://claude.ai/artifact/A8qWUy1sEzq49qgaxUuZnB" target="_blank" rel="noopener">Try the prototype ↗</a>
+          <a class="btn block" href="https://claude.ai/artifact/A8qWUy1sEzq49qgaxUuZnB" target="_blank" rel="noopener">Try the prototype ↗</a>
           <p class="hint">Loaded with sample contacts. Works best on a phone.</p>
         </div>
       </div>
@@ -170,7 +167,7 @@
   </article>
 
   <!-- 3. Jack's Customs -->
-  <article class="project band" id="production" aria-labelledby="p3">
+  <article class="project band p-jc" id="production" aria-labelledby="p3">
     <div class="wrap">
       <header class="p-head">
         <span class="num">04</span>
@@ -219,8 +216,8 @@
   <!-- Contact -->
   <section class="contact" id="contact" aria-labelledby="contact-h">
     <div class="wrap">
-      <h2 id="contact-h">Let's talk.</h2>
-      <p>Open to strategy, business analytics and business intelligence roles.</p>
+      <h2 id="contact-h">Let's connect.</h2>
+      <p>Looking for Summer 2027 internships in strategy and analytics.</p>
       <div class="contact-row">
         <a class="btn light" href="mailto:kthant@marshall.usc.edu">kthant@marshall.usc.edu</a>
         <button class="btn outline" type="button" id="copy-email" data-email="kthant@marshall.usc.edu">Copy email</button>
@@ -235,7 +232,6 @@
 
 </main>
 
-<script src="assets/la-points.js?v=20261106114729"></script>
-<script src="assets/site.js?v=20261106114729"></script>
+<script src="assets/site.js?v=20261106140836"></script>
 </body>
 </html>
