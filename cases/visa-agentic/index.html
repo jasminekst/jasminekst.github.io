@@ -70,7 +70,6 @@ h2 em, h1 em { font-family: var(--serif); font-style: italic; font-weight: 500; 
 .title-s .lede { font-size: 2cqw; color: rgba(255,255,255,.82); margin-top: 2.2cqw; max-width: 40ch; }
 .title-s .by { margin-top: 4cqw; font-size: 1.35cqw; color: rgba(255,255,255,.75); }
 .title-s .by b { color: #fff; font-weight: 700; }
-.disclaimer { position: absolute; left: 6cqw; bottom: 4cqw; font-size: .9cqw; color: rgba(255,255,255,.5); }
 .waves { position: absolute; right: -4cqw; top: 0; bottom: 0; width: 46cqw; opacity: .9; }
 
 /* why I care */
@@ -182,6 +181,47 @@ tr.rec td:first-child { box-shadow: inset .5cqw 0 0 var(--gold); }
 .sources div { color: var(--muted); }
 .method { margin-top: 1.8cqw; font-size: 1.2cqw; background: var(--mist); border-radius: 1cqw; padding: 1.4cqw 1.8cqw; }
 
+/* round-2 additions */
+ul.bul { margin: 0; padding: 0; list-style: none; display: grid; gap: .9cqw; }
+ul.bul li { position: relative; padding-left: 1.5cqw; font-size: 1.38cqw; }
+ul.bul li::before { content: ""; position: absolute; left: 0; top: .72cqw; width: .55cqw; height: .55cqw; border-radius: 50%; background: var(--blue); }
+.card.hl ul.bul li { color: #fff; } .card.hl ul.bul li::before { background: var(--gold); }
+.card ul.bul li b { color: var(--navy); } .card.hl ul.bul li b { color: var(--gold); }
+.bar-row .lbl small { display: block; margin-top: .2cqw; }
+.chain { display: grid; gap: 1.1cqw; }
+.chain .step { display: grid; grid-template-columns: 3cqw 1fr auto; gap: 1cqw; align-items: baseline; border-bottom: .15cqw solid var(--line); padding-bottom: 1cqw; }
+.chain .op { font: 700 1.6cqw var(--sans); color: var(--blue); text-align: center; }
+.chain .what { font-size: 1.3cqw; } .chain .what small { display: block; color: var(--muted); font-size: 1.05cqw; }
+.chain .val { font-size: 2cqw; font-weight: 800; color: var(--navy); letter-spacing: -.02em; white-space: nowrap; }
+.chain .step.total { border-bottom: 0; background: var(--navy); border-radius: 1cqw; padding: 1cqw 1.2cqw; }
+.chain .step.total .what, .chain .step.total .op { color: #fff; } .chain .step.total .val { color: var(--gold); }
+.chain .step.total small { color: rgba(255,255,255,.7); }
+.scen { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1cqw; margin-top: 1.2cqw; font-size: 1.05cqw; color: var(--muted); }
+.scen b { color: var(--ink); display: block; font-size: 1.15cqw; }
+.moves { align-items: stretch; }
+.move { display: flex; flex-direction: column; gap: 1.1cqw; }
+.move .why { margin-top: auto; }
+.move .arrow { color: var(--gold); }
+.body.metrics { flex: none; }
+.body.center { align-content: center; }
+.risk .test { margin-top: .5cqw; color: var(--muted); }
+.risk .test span { color: var(--blue); font-weight: 700; }
+.sources a { color: var(--blue); text-decoration: none; font-weight: 600; }
+.sources a:hover { text-decoration: underline; }
+.why-big { font-family: var(--serif); font-style: italic; font-size: 3.6cqw; line-height: 1.2; color: var(--navy); max-width: 26ch; margin-top: 1cqw; }
+.why-big em { color: var(--blue); }
+.why-text { margin-top: 2.6cqw; font-size: 1.75cqw; color: var(--ink); max-width: 56ch; }
+
+/* slide 5 fit */
+.s5 h2 { font-size: 2.6cqw; max-width: 40ch; }
+.s5 .body { margin-top: 2cqw; align-items: center; }
+.s5 .chart svg { max-height: 21cqw; }
+.s5 .legend { margin-top: .6cqw; }
+.s5 .chain { gap: .7cqw; }
+.s5 .chain .step { padding-bottom: .7cqw; }
+.s5 .chain .what { font-size: 1.2cqw; } .s5 .chain .val { font-size: 1.8cqw; }
+.s5 .scen { margin-top: 1.4cqw; padding-top: 1.2cqw; border-top: .15cqw solid var(--line); }
+
 /* print to PDF: one slide per page */
 @page { size: 13.333in 7.5in; margin: 0; }
 @media print {
@@ -223,20 +263,19 @@ tr.rec td:first-child { box-shadow: inset .5cqw 0 0 var(--gold); }
       <p class="kicker">Strategy case · Agentic commerce · Data &amp; AI</p>
       <h1>Trust is the new <em>checkout</em></h1>
       <p class="lede">How Visa can turn AI shopping agents from a pilot into a habit.</p>
-      <p class="by"><b>Kyi Sin Thant</b> · M.S. Business Analytics, USC Marshall · November 2026</p>
-      <p class="disclaimer">Independent analysis built from public sources. Not affiliated with or endorsed by Visa.</p>
+      <p class="by"><b>Kyi Sin Thant</b></p>
     </div>
   </section>
 
-  <!-- 2. Why I care -->
-  <section class="slide" aria-label="Why I picked this question">
-    <div class="s">
-      <p class="kicker">Why I picked this question</p>
+  <!-- 2. Why this question -->
+  <section class="slide" aria-label="Why this question">
+    <div class="s" style="justify-content:center">
+      <p class="kicker">Why this question</p>
       <div class="quote-wrap">
         <span class="bar" aria-hidden="true"></span>
         <div>
-          <p class="quote">When I built AfterChat, the app wrote the thank-you email but never sent it for you. Students told us they wanted the final say.</p>
-          <p class="why-note">Shopping agents face the same question, with real money on the line. Visa has already built the rails for AI agents to pay. I wanted to understand what it would take for people to actually use them, and what Visa's Data &amp; AI team could do about it.</p>
+          <p class="why-big">With real money on the line, what would make people let an AI agent <em>pay for them?</em></p>
+          <p class="why-text">Visa has already built the rails for AI agents to pay. I wanted to understand what it would take for people to actually use them, and what Visa's Data &amp; AI team could do about it.</p>
         </div>
       </div>
     </div>
@@ -249,9 +288,24 @@ tr.rec td:first-child { box-shadow: inset .5cqw 0 0 var(--gold); }
       <p class="kicker">The short version</p>
       <h2>The rails are built. <em>Trust</em> is what's missing.</h2>
       <div class="body three">
-        <div class="card"><span class="n">What's happening</span><h3>AI assistants have started buying on people's behalf.</h3><p>Morgan Stanley expects $190B to $385B of US spending to run through shopping agents by 2030, 10% to 20% of e-commerce.</p></div>
-        <div class="card"><span class="n">What I found</span><h3>The revenue is modest. The position is big.</h3><p>In my base case that's about $99B on Visa and $280M of net revenue, under 1% of today's. Only 6% of shoppers would let an AI buy without checking in first.</p></div>
-        <div class="card hl"><span class="n">What I recommend</span><h3>Make control visible to shoppers.</h3><p>Put agent limits and approvals inside the banking apps people already use. Start with everyday baskets under $100. Give every agent purchase a clear path to fix mistakes.</p></div>
+        <div class="card"><span class="n">What's happening</span><h3>AI agents have started buying for people.</h3>
+          <ul class="bul">
+            <li>Morgan Stanley expects <b>$190B to $385B</b> of US spending to run through shopping agents by 2030.</li>
+            <li>That's <b>10% to 20%</b> of US e-commerce.</li>
+            <li>Visa, Mastercard, OpenAI and Google have all launched ways for agents to pay.</li>
+          </ul></div>
+        <div class="card"><span class="n">What I found</span><h3>The revenue is modest. The position is big.</h3>
+          <ul class="bul">
+            <li>In my 2030 base case, about <b>$99B</b> of agent spending would run on Visa's network.</li>
+            <li>That earns Visa about <b>$278M</b> in net revenue, under 1% of its FY2025 net revenue of $40.0B.</li>
+            <li>Only <b>6%</b> of shoppers would let an AI buy without checking in first.</li>
+          </ul></div>
+        <div class="card hl"><span class="n">What I recommend</span><h3>Make control visible to shoppers.</h3>
+          <ul class="bul">
+            <li>Put agent limits and approvals inside the banking apps people already use.</li>
+            <li>Start with everyday baskets <b>under $100</b>.</li>
+            <li>Give every agent purchase a clear way to fix mistakes.</li>
+          </ul></div>
       </div>
     </div>
     <span class="foot">03</span>
@@ -276,7 +330,7 @@ tr.rec td:first-child { box-shadow: inset .5cqw 0 0 var(--gold); }
   </section>
 
   <!-- 5. Market size -->
-  <section class="slide" aria-label="Market size">
+  <section class="slide s5" aria-label="Market size">
     <div class="s">
       <p class="kicker">How big it gets</p>
       <h2>By 2030, about <em>$190B</em> of US spending could run through AI agents. Roughly half of it on Visa.</h2>
@@ -298,20 +352,26 @@ tr.rec td:first-child { box-shadow: inset .5cqw 0 0 var(--gold); }
                 <text x="460" y="24">$380B</text><text x="530" y="127">$209B</text>
               </g>
               <g text-anchor="middle" font-size="14" font-weight="700" fill="#141a3d">
-                <text x="135" y="284">Low</text><text x="315" y="284">Base</text><text x="495" y="284">High</text>
+                <text x="135" y="284">Low · 2030</text><text x="315" y="284">Base · 2030</text><text x="495" y="284">High · 2030</text>
               </g>
             </g>
           </svg>
           <div class="legend"><span><i style="background:#dfe4f7"></i>US agentic spending</span><span><i style="background:#1434cb"></i>On Visa</span></div>
         </div>
-        <div class="points">
-          <div class="point"><b>$1.65T</b><span>US e-commerce in 2030, from $1.23T in 2025 at 6% a year</span></div>
-          <div class="point"><b>11.5%</b><span>Base-case agentic share. Matches Morgan Stanley's base and bull cases</span></div>
-          <div class="point"><b>85% × 61%</b><span>Share paid with card credentials, times Visa's share of US card spending</span></div>
+        <div class="chain" aria-label="How the base case is built">
+          <div class="step"><span class="op"></span><span class="what">US e-commerce in 2030<small>$1.23T in 2025 (Census), grown 6% a year</small></span><span class="val">$1.65T</span></div>
+          <div class="step"><span class="op">×</span><span class="what">11.5% bought through AI agents<small>Matches Morgan Stanley's 2030 base case</small></span><span class="val">$190B</span></div>
+          <div class="step"><span class="op">×</span><span class="what">85% paid with card credentials<small>My assumption; the rest goes to bank transfers and other rails</small></span><span class="val">$161B</span></div>
+          <div class="step total"><span class="op">×</span><span class="what">61% Visa's share of US card spending<small>Nilson Report, 2024</small></span><span class="val">$99B</span></div>
         </div>
       </div>
+      <div class="scen">
+        <span><b>Low: slow adoption</b>5% of e-commerce through agents, 75% on cards</span>
+        <span><b>Base: most likely case</b>11.5% through agents, 85% on cards</span>
+        <span><b>High: fast adoption</b>23% through agents (Morgan Stanley bull case), 90% on cards</span>
+      </div>
     </div>
-    <p class="src">Model: Kyi_Sin_Thant_Visa_Agentic_Commerce_Model.xlsx. Census (2025 e-commerce), Morgan Stanley (Nov 2025), Nilson (2024 card share).</p>
+    <p class="src">All three are 2030 projections. Sources: US Census Bureau, Q4 2025 e-commerce; Morgan Stanley, Nov 2025; Nilson Report, 2024. Full model in the Excel file.</p>
     <span class="foot">05</span>
   </section>
 
@@ -392,29 +452,37 @@ tr.rec td:first-child { box-shadow: inset .5cqw 0 0 var(--gold); }
   <!-- 9. Recommendation -->
   <section class="slide" aria-label="Recommendation">
     <div class="s">
-      <p class="kicker">Recommendation</p>
+      <p class="kicker">Recommendation · three steps, in order</p>
       <h2>Put the controls <em>where people already manage their money</em></h2>
       <div class="body moves">
         <div class="move">
-          <span class="num">MOVE 1</span>
+          <span class="num">STEP 1 · BUILD THE CONTROLS</span>
           <h3>An "Agents" screen in every issuer's app</h3>
-          <div class="mock" aria-label="Example of an agent controls screen">
-            <div class="mock-row"><b>ChatGPT</b><span class="lim">$100 / week</span><span class="toggle"></span></div>
-            <div class="mock-row"><b>Grocery agent</b><span class="lim">$75 / order</span><span class="toggle"></span></div>
-            <div class="mock-row"><b>Travel agent</b><span class="lim">Ask me</span><span class="toggle off"></span></div>
-          </div>
-          <p class="why">See every agent using your card, set a limit, approve big buys with a passkey, switch one off in a tap. Built on Visa's agent tokens.</p>
+          <ul class="bul">
+            <li>See every agent using your card</li>
+            <li>Set a spending limit per agent</li>
+            <li>Approve big buys with a passkey</li>
+            <li>Switch an agent off in one tap</li>
+          </ul>
+          <p class="why">Built on Visa's existing agent tokens and passkeys, so issuers add a screen, not a new system.</p>
         </div>
         <div class="move">
-          <span class="num">MOVE 2</span>
+          <span class="num">STEP 2 · LAUNCH SMALL</span>
           <h3>Start with the everyday basket</h3>
-          <p>Launch with groceries and household refills under $100, where 69% of shoppers are already comfortable.</p>
-          <p class="why">Morgan Stanley puts grocery and household goods at 19% of 2030 agentic spending. Small, repeat orders build the habit fastest.</p>
+          <ul class="bul">
+            <li>Groceries and household refills</li>
+            <li>Orders under $100</li>
+            <li>Repeat purchases that build the habit fast</li>
+          </ul>
+          <p class="why">69% of shoppers are already comfortable here. Morgan Stanley puts these categories at 19% of 2030 agent spending.</p>
         </div>
         <div class="move">
-          <span class="num">MOVE 3</span>
+          <span class="num">STEP 3 · BACK IT UP</span>
           <h3>A clear fix when an agent gets it wrong</h3>
-          <p>One dispute path for agent purchases, using Visa's record of what the agent was allowed to buy and what it bought.</p>
+          <ul class="bul">
+            <li>One dispute path for every agent purchase</li>
+            <li>Visa's record shows what the agent was allowed to buy and what it bought</li>
+          </ul>
           <p class="why">Half of shoppers would blame the AI platform today. Visa can be the neutral record that settles it.</p>
         </div>
       </div>
@@ -448,11 +516,11 @@ tr.rec td:first-child { box-shadow: inset .5cqw 0 0 var(--gold); }
     <div class="s">
       <p class="kicker">Risks and what I'd test first</p>
       <h2>What could go wrong</h2>
-      <div class="body risks">
-        <div class="risk"><b>Issuers move slowly</b><p>Banking app changes take time. <span>Test:</span> start with two digital-first issuers and a shared design Visa provides.</p></div>
-        <div class="risk"><b>Agents skip cards</b><p>Account-to-account payments or stablecoins could win the agent slot. <span>Test:</span> keep supporting every protocol through Intelligent Commerce Connect.</p></div>
-        <div class="risk"><b>Controls add friction</b><p>Too many prompts and people give up. <span>Test:</span> smart default limits that need no setup, approvals only above the limit.</p></div>
-        <div class="risk"><b>Privacy concerns</b><p>Sharing purchase data with agents can feel invasive. <span>Test:</span> consent-first sharing, written with the Chief Privacy Officer, explained in plain words.</p></div>
+      <div class="body risks center">
+        <div class="risk"><b>Issuers move slowly</b><p>Banking app changes take time.</p><p class="test"><span>Test:</span> start with two digital-first issuers and a shared design Visa provides.</p></div>
+        <div class="risk"><b>Agents skip cards</b><p>Bank transfers or stablecoins could win the agent slot.</p><p class="test"><span>Test:</span> keep supporting every protocol through Intelligent Commerce Connect.</p></div>
+        <div class="risk"><b>Controls add friction</b><p>Too many prompts and people give up.</p><p class="test"><span>Test:</span> smart default limits that need no setup, approvals only above the limit.</p></div>
+        <div class="risk"><b>Privacy concerns</b><p>Sharing purchase data with agents can feel invasive.</p><p class="test"><span>Test:</span> consent-first sharing, written with the Chief Privacy Officer, explained in plain words.</p></div>
       </div>
     </div>
     <span class="foot">11</span>
@@ -463,15 +531,15 @@ tr.rec td:first-child { box-shadow: inset .5cqw 0 0 var(--gold); }
     <div class="s">
       <p class="kicker">Sources and method</p>
       <h2>Where the numbers come from</h2>
-      <div class="body sources">
-        <div><b>US e-commerce, 2025</b>US Census Bureau, Quarterly Retail E-Commerce, Q4 2025: $1,233.7B</div>
-        <div><b>Visa financials</b>Visa FY2025 Form 10-K and Annual Report: $40.0B net revenue, $14.2T payments volume</div>
-        <div><b>Visa card share</b>Nilson Report, Feb 2025: Visa 61.1% of US card spending in 2024</div>
-        <div><b>Agentic forecast</b>Morgan Stanley, reported Nov 29, 2025: ~$190B base, ~$385B bull, 2030</div>
-        <div><b>Consumer trust</b>Worldpay (Aug-Sep 2025), Riskified (Q1 2026), Global Payments (2026) consumer surveys</div>
-        <div><b>Visa agentic products</b>Visa newsroom: Intelligent Commerce (Apr 2025), Trusted Agent Protocol (Oct 2025), Intelligent Commerce Connect (Apr 2026)</div>
+      <div class="body sources center">
+        <div><b>US e-commerce, 2025</b><a href="https://www.census.gov/retail/ecommerce.html">US Census Bureau</a>, Quarterly Retail E-Commerce, Q4 2025: $1,233.7B</div>
+        <div><b>Visa financials</b><a href="https://www.sec.gov/Archives/edgar/data/1403161/000140316125000089/v-20250930.htm">Visa FY2025 Form 10-K</a>: $40.0B net revenue, $14.2T payments volume</div>
+        <div><b>Visa card share</b><a href="https://rss.globenewswire.com/news-release/2025/02/25/3032247/0/en/Amex-Discover-Mastercard-and-Visa-Card-Spending-Exceeded-10-Trillion-in-2024.html">Nilson Report, Feb 2025</a>: Visa 61.1% of US card spending in 2024</div>
+        <div><b>Agentic forecast</b><a href="https://finance.yahoo.com/news/morgan-stanley-sees-multi-path-093502239.html">Morgan Stanley, reported Nov 2025</a>: ~$190B base, ~$385B bull, 2030</div>
+        <div><b>Consumer trust</b><a href="https://corporate.worldpay.com/node/7286/pdf">Worldpay</a> (2025), <a href="https://forkast.news/73-use-ai-for-shopping-55-wont-let-it-buy-anything-the-trust-gap-is-widening/">Riskified</a> (Q1 2026), <a href="https://secure.businesswire.com/news/home/20260923900333/en/Consumers-Expect-AI-to-Make-15-of-Their-Purchases-Within-Five-Years-Global-Payments-Research-Finds">Global Payments</a> (2026)</div>
+        <div><b>Visa agentic products</b><a href="https://usa.visa.com/about-visa/newsroom/press-releases.releaseId.22276.html">Visa newsroom</a>: Intelligent Commerce (2025), Trusted Agent Protocol (2025), Intelligent Commerce Connect (2026)</div>
       </div>
-      <p class="method">Method: 2030 e-commerce × agentic share × card credential share × Visa card share × net revenue yield, in three scenarios. Every input and formula is in the Excel model. Survey figures use different questions and samples, so I read them as a pattern, not one number.</p>
+      <p class="method">Method: 2030 e-commerce × share bought through agents × share paid by card × Visa's card share × net revenue yield, in three scenarios. Every input and formula is in the Excel model. The consumer surveys asked different questions, so I compare them side by side and don't merge them into one number.</p>
     </div>
     <span class="foot">12</span>
   </section>
