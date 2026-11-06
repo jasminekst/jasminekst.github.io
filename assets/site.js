@@ -131,15 +131,15 @@
   }
   function charts() {
     ["chart-visa", "chart-la", "chart-ac", "art-0", "art-1", "art-2", "art-3"].forEach(function (id) { var n = document.getElementById(id); if (n) n.innerHTML = ""; });
-    hbar("chart-visa", [["Low", 83], ["Base", 190, 1], ["High", 380]],
-      { color: cssVar("--acc", "visa"), track: cssVar("--acc-soft", "visa"), fmt: function (v) { return "$" + v + "B"; }, max: 400, labelW: 60, label: "US agentic spending in 2030 by scenario",
-        note: "My model. Base and high match Morgan Stanley's 2030 cases. About half runs on Visa." });
+    hbar("chart-visa", [["Buy on its own, no check-in", 6], ["Buy only after I review it", 44], ["Spend up to $100 on essentials", 69, 1]],
+      { color: cssVar("--acc", "visa"), track: cssVar("--acc-soft", "visa"), fmt: function (v) { return v + "%"; }, max: 100, labelW: 190, label: "What shoppers would let an AI agent do",
+        note: "Few shoppers would let an AI buy on its own, but most would let one handle a small grocery order. Figures come from Worldpay (2025) and Global Payments (2026) surveys, which asked different questions." });
     hbar("chart-la", [["Santa Monica", 327], ["West Hollywood", 309], ["Venice", 290], ["Pasadena", 241], ["Long Beach", 222], ["Downtown", 217], ["Hollywood", 171], ["Exposition Park", 48]],
       { color: cssVar("--acc", "dashboard"), track: cssVar("--acc-soft", "dashboard"), fmt: function (v) { return "$" + v; }, label: "Median nightly price by neighborhood",
-        note: "Inside Airbnb, Los Angeles snapshot. Excludes listings with no price and flagged high prices." });
-    hbar("chart-ac", [["Delay the follow-up", 38], ["Unsure what to write", 38], ["Forget details", 35], ["Forget advice", 28], ["Lose track of intros", 23]],
-      { color: cssVar("--acc", "afterchat"), track: cssVar("--acc-soft", "afterchat"), fmt: function (v) { return v + "%"; }, max: 50, labelW: 150, label: "Biggest challenges after a coffee chat",
-        note: "Survey of 60 graduate students. Select all that apply." });
+        note: "Prices come from the Inside Airbnb Los Angeles snapshot and leave out listings with no price or an unusually high one." });
+    hbar("chart-ac", [["Follow-up reminders", 48, 1], ["Referral tracking", 48, 1], ["Organized notes", 40], ["Thank-you drafts", 32], ["Searchable history", 22]],
+      { color: cssVar("--acc", "afterchat"), track: cssVar("--acc-soft", "afterchat"), fmt: function (v) { return v + "%"; }, max: 50, labelW: 150, label: "What students most wanted after a coffee chat",
+        note: "In our survey of 60 graduate students, these answers decided which features the app would have." });
     cardArt();
   }
 
