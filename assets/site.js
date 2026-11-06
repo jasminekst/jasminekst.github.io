@@ -109,7 +109,8 @@
   if (canvas) {
     if ("IntersectionObserver" in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; visible ? start() : stop(); }).observe(canvas);
     document.addEventListener("visibilitychange", function () { document.hidden ? stop() : start(); });
-    window.addEventListener("resize", function () { if (reduce) frame(4000); });
+    window.addEventListener("resize", function () { if (reduce || !running) frame(4000); });
+    frame(4000); // draw a still frame first, so the canvas is never empty
     start();
   }
 
