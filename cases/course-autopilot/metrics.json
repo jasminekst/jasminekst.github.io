@@ -1,0 +1,46 @@
+{
+  "updated": "2026-11-06",
+  "since": "2026-10-10",
+  "auto_total": 98,
+  "outcomes": {
+    "filed": 81,
+    "replaced": 8,
+    "duplicate": 6,
+    "zip": 3
+  },
+  "flagged_total": 35,
+  "flag_reasons": {
+    "course_generic": 19,
+    "not_course": 12,
+    "temp": 4
+  },
+  "automation_rate": 0.8376,
+  "files_deleted": 0,
+  "weeks": [
+    {
+      "week": "2026-10-05",
+      "auto": 13,
+      "flagged": 2
+    },
+    {
+      "week": "2026-10-12",
+      "auto": 55,
+      "flagged": 12
+    },
+    {
+      "week": "2026-10-19",
+      "auto": 10,
+      "flagged": 13
+    },
+    {
+      "week": "2026-10-26",
+      "auto": 14,
+      "flagged": 0
+    },
+    {
+      "week": "2026-11-02",
+      "auto": 6,
+      "flagged": 8
+    }
+  ]
+}

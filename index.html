@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=20261106143840">
+<link rel="stylesheet" href="assets/style.css?v=20261107093313">
 </head>
 <body>
 
@@ -62,6 +62,10 @@
         <div class="card-art"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-0"></svg></div>
         <div class="card-text"><span class="tag">Strategy case</span><h3>Trust Is the New Checkout</h3><p>What Visa should do as AI agents start paying for people.</p></div>
       </a>
+      <a class="card p-auto" href="#autopilot">
+        <div class="card-art"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-4"></svg></div>
+        <div class="card-text"><span class="tag">AI automation</span><h3>Course Files on Autopilot</h3><p>A manual workflow that now runs itself, with results tracked.</p></div>
+      </a>
       <a class="card p-air" href="#dashboard">
         <div class="card-art"><svg viewBox="0 0 200 110" aria-hidden="true" id="art-1"></svg></div>
         <div class="card-text"><span class="tag">Dashboard</span><h3>LA Stay Shortlist</h3><p>Where to stay in LA on a budget, from 43,932 listings.</p></div>
@@ -107,11 +111,40 @@
     </div>
   </article>
 
-  <!-- 2. Dashboard -->
-  <article class="project band p-air" id="dashboard" aria-labelledby="p1">
+  <!-- 2. Automation case -->
+  <article class="project band p-auto" id="autopilot" aria-labelledby="p4">
     <div class="wrap">
       <header class="p-head">
         <span class="num">02</span>
+        <div><span class="tag">AI workflow automation</span><h2 id="p4">Course Files on Autopilot</h2><p class="role-line">Solo project</p></div>
+      </header>
+      <div class="p-grid">
+        <div class="p-main">
+          <p class="question">Sorting each course file took about seven steps by hand. Which of those could run on their own, and how would I know it was working?</p>
+          <ul class="work-list">
+            <li>Mapped the seven steps and set the rules first: never delete, keep old versions, and ask when unsure.</li>
+            <li>Built a program that files new downloads, plus an AI agent that checks a professor's Google Drive twice a day.</li>
+            <li>Tested it with 33 automated tests, then asked a second AI model to find weak spots and fixed every one that could lose or misfile a file.</li>
+            <li>Since October 10 it has filed <span id="m-auto">98</span> files with no manual step, <span id="m-rate">84%</span> of all course files, without losing a single file. The numbers below update every evening.</li>
+          </ul>
+          <ul class="tools" aria-label="Tools"><li>Process mapping</li><li>Python</li><li>AI agents</li><li>AI-assisted coding</li><li>Automated testing</li><li>Monitoring</li></ul>
+        </div>
+        <div class="p-side">
+          <figure class="chart">
+            <figcaption>What happened to each file <span id="m-updated">(live)</span></figcaption>
+            <div id="chart-auto"></div>
+          </figure>
+          <a class="btn block" href="cases/course-autopilot/">Read the case study ↗</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 3. Dashboard -->
+  <article class="project p-air" id="dashboard" aria-labelledby="p1">
+    <div class="wrap">
+      <header class="p-head">
+        <span class="num">03</span>
         <div><span class="tag">Dashboard</span><h2 id="p1">LA Stay Shortlist</h2><p class="role-line">Team project · I designed and built the dashboard</p></div>
       </header>
       <div class="p-grid">
@@ -137,10 +170,10 @@
   </article>
 
   <!-- 2. AfterChat -->
-  <article class="project p-ac" id="afterchat" aria-labelledby="p2">
+  <article class="project band p-ac" id="afterchat" aria-labelledby="p2">
     <div class="wrap">
       <header class="p-head">
-        <span class="num">03</span>
+        <span class="num">04</span>
         <div><span class="tag">App build &amp; research</span><h2 id="p2">AfterChat</h2><p class="role-line">Team project · I designed and built the app</p></div>
       </header>
       <div class="p-grid">
@@ -168,10 +201,10 @@
   </article>
 
   <!-- 3. Jack's Customs -->
-  <article class="project band p-jc" id="production" aria-labelledby="p3">
+  <article class="project p-jc" id="production" aria-labelledby="p3">
     <div class="wrap">
       <header class="p-head">
-        <span class="num">04</span>
+        <span class="num">05</span>
         <div><span class="tag">Decision model</span><h2 id="p3">Jack's Customs</h2></div>
       </header>
       <div class="p-grid">
@@ -210,7 +243,7 @@
     <div class="skills">
       <div><span class="sk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h3>Analysis &amp; BI</h3><p>Python, pandas, Streamlit, Plotly, dashboard design, data cleaning, generative AI tools (building and testing AI features)</p></div>
       <div><span class="sk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><h3>Decision modeling</h3><p>Excel Solver (linear, integer and nonlinear), market sizing, sensitivity analysis, scenario planning</p></div>
-      <div><span class="sk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.7-3.6 3.4-5.6 6.5-5.6s5.8 2 6.5 5.6"/><path d="M17 4.5a3.5 3.5 0 0 1 0 7M19 14.5c1.6.8 2.6 2.6 2.9 5.5"/></svg></span><h3>Research &amp; strategy</h3><p>Survey design, customer segmentation, competitive research, feature prioritization, strategy decks</p></div>
+      <div><span class="sk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.7-3.6 3.4-5.6 6.5-5.6s5.8 2 6.5 5.6"/><path d="M17 4.5a3.5 3.5 0 0 1 0 7M19 14.5c1.6.8 2.6 2.6 2.9 5.5"/></svg></span><h3>Research &amp; strategy</h3><p>Process mapping, Survey design, customer segmentation, competitive research, feature prioritization, strategy decks</p></div>
     </div>
   </section>
 
@@ -232,6 +265,6 @@
 
 </main>
 
-<script src="assets/site.js?v=20261106143840"></script>
+<script src="assets/site.js?v=20261107093313"></script>
 </body>
 </html>

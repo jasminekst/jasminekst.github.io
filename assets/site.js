@@ -131,10 +131,16 @@
     if (opts.note) { var p = document.createElement("p"); p.className = "note"; p.textContent = opts.note; host.appendChild(p); }
   }
   function charts() {
-    ["chart-visa", "chart-la", "chart-ac", "art-0", "art-1", "art-2", "art-3"].forEach(function (id) { var n = document.getElementById(id); if (n) n.innerHTML = ""; });
+    ["chart-visa", "chart-auto", "chart-la", "chart-ac"].forEach(function (id) { var n = document.getElementById(id); if (n) n.innerHTML = ""; });
     hbar("chart-visa", [["Buy on its own, no check-in", 6], ["Buy only after I review it", 44], ["Spend up to $100 on essentials", 69, 1]],
       { color: cssVar("--acc", "visa"), track: cssVar("--acc-soft", "visa"), fmt: function (v) { return v + "%"; }, max: 100, labelW: 190, label: "What shoppers would let an AI agent do",
         note: "Few shoppers would let an AI buy on its own, but most would let one handle a small grocery order. Figures come from Worldpay (2025) and Global Payments (2026) surveys, which asked different questions." });
+    var M = window.AUTO_METRICS || { auto_total: 98, automation_rate: 0.8376, flagged_total: 35, updated: "2026-11-06", outcomes: { filed: 81, replaced: 8, duplicate: 6, zip: 3 } };
+    hbar("chart-auto", [["Filed", M.outcomes.filed, 1], ["New version, old archived", M.outcomes.replaced, 1], ["Duplicate skipped", M.outcomes.duplicate, 1], ["Zip unpacked", M.outcomes.zip, 1], ["Sent for review", M.flagged_total]],
+      { color: cssVar("--acc", "autopilot"), track: cssVar("--acc-soft", "autopilot"), fmt: function (v) { return v; }, max: Math.max(M.outcomes.filed, M.flagged_total) * 1.1, labelW: 175, label: "What happened to each file",
+        note: "Counts come from the system's own log and refresh every evening. Almost half the files sent for review weren't course files at all." });
+    var upd = new Date(M.updated + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    [["m-auto", M.auto_total], ["m-rate", Math.round(M.automation_rate * 100) + "%"], ["m-updated", "(updated " + upd + ")"]].forEach(function (x) { var n = document.getElementById(x[0]); if (n) n.textContent = x[1]; });
     hbar("chart-la", [["Santa Monica", 327], ["West Hollywood", 309], ["Venice", 290], ["Pasadena", 241], ["Long Beach", 222], ["Downtown", 217], ["Hollywood", 171], ["Exposition Park", 48]],
       { color: cssVar("--acc", "dashboard"), track: cssVar("--acc-soft", "dashboard"), fmt: function (v) { return "$" + v; }, label: "Median nightly price by neighborhood",
         note: "Prices come from the Inside Airbnb Los Angeles snapshot and leave out listings with no price or an unusually high one." });
@@ -174,6 +180,11 @@
       '<path d="M148 24 C162 30 170 18 182 12" fill="none" stroke="currentColor" stroke-width="1.8" opacity=".6"/>' +
       '<path d="M176 15 L194 5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cx="191.5" cy="6.5" r="1.4" fill="none" stroke="currentColor" stroke-width="1"/>'
   };
+  // Course Files on Autopilot: files flowing into a folder, with a check mark
+  ART["art-4"] = '<g fill="currentColor" opacity=".35"><rect x="30" y="20" width="22" height="28" rx="3" transform="rotate(-12 41 34)"/><rect x="58" y="10" width="22" height="28" rx="3" transform="rotate(6 69 24)"/></g>' +
+    '<g fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 4" opacity=".6"><path d="M50 50 C60 62 72 64 86 62"/><path d="M76 40 C82 52 88 56 96 58"/></g>' +
+    '<path d="M88 46 h22 l8 9 h40 a6 6 0 0 1 6 6 v34 a6 6 0 0 1 -6 6 h-70 a6 6 0 0 1 -6 -6 v-43 a6 6 0 0 1 6 -6 z" fill="currentColor"/>' +
+    '<circle cx="152" cy="40" r="15" style="fill:var(--acc-2)"/><path d="M145 40 l5 5 9 -10" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>';
   function cardArt() {
     Object.keys(ART).forEach(function (id) { var n = document.getElementById(id); if (n) n.innerHTML = ART[id]; });
   }
@@ -228,6 +239,8 @@
 
   charts();
   if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", charts);
+  fetch("cases/course-autopilot/metrics.json?t=" + Date.now()).then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) { if (d && d.outcomes) { window.AUTO_METRICS = d; charts(); } }).catch(function () {});
 
   /* ---------- Copy email ---------- */
   var btn = document.getElementById("copy-email");

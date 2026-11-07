@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Course Files on Autopilot · Kyi Sin Thant</title>
+<meta name="description" content="A case study in AI workflow automation: mapping a manual process, setting success metrics, building with AI-assisted coding, testing, and monitoring results.">
+<meta property="og:title" content="Course Files on Autopilot">
+<meta property="og:description" content="How I turned a manual file workflow into one that runs itself, and measured whether it worked.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css?v=20261107093313">
+<style>
+/* Layout: one reading column for the story, full-width panels for the process map and dashboard. */
+:root { --acc: #4b2ed4; --acc-soft: #ebe8fd; --acc-2: #ff5a4e; --acc-2-soft: #ffe7e4; --ink-violet: #1e0f4a; }
+@media (prefers-color-scheme: dark) { :root { --acc: #9d8cff; --acc-soft: #221d4a; --acc-2: #ff7a70; --acc-2-soft: #3a1d1c; } }
+.case-top { background: radial-gradient(1000px 420px at 85% 0%, #2c1a6b, var(--ink-violet, #1e0f4a)); color: var(--on-navy); }
+.case-top .wrap { padding-block: 56px 64px; display: grid; gap: 18px; }
+.back { color: var(--on-navy-muted); text-decoration: none; font-size: 14px; }
+.back:hover { color: var(--on-navy); }
+.case-top h1 { font-family: var(--display); font-size: clamp(40px, 6vw, 68px); line-height: 1.02; font-weight: 600; }
+.case-top h1 em { font-style: italic; font-weight: 500; color: #ff8a80; }
+.case-top .sub { font-size: 19px; color: var(--on-navy-muted); max-width: 58ch; }
+.case-top .role-line { color: #ff8a80; margin: 0; }
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.kpi { background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .12); border-radius: 14px; padding: 16px 18px; display: grid; gap: 4px; }
+.kpi b { font: 500 34px var(--mono); color: #fff; letter-spacing: -.02em; }
+.kpi span { font-size: 14px; color: var(--on-navy-muted); line-height: 1.4; }
+
+.block { padding-block: 72px 0; }
+.block h2 { font-family: var(--display); font-size: clamp(28px, 4vw, 40px); margin-bottom: 8px; }
+.block .step { font: 700 16px var(--body); color: var(--acc); }
+.lead { font-size: 18px; max-width: 64ch; color: var(--ink); margin-top: 6px; }
+.lead + .lead { margin-top: 12px; }
+.muted { color: var(--muted); }
+
+/* process map */
+.map { margin-top: 28px; display: grid; gap: 18px; }
+.lane { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px 22px; display: grid; gap: 14px; }
+.lane h3 { font-size: 15px; font-family: var(--body); font-weight: 700; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.lane h3 span { font-weight: 500; color: var(--muted); }
+.flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.node { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; font-size: 14px; }
+.node.you { border-color: var(--coral); }
+.node.auto { background: var(--acc-soft); border-color: transparent; color: var(--ink); }
+.node.check { background: var(--acc-2-soft); border-color: transparent; }
+.flow { counter-reset: st; }
+.node { counter-increment: st; }
+.node::before { content: counter(st); display: inline-grid; place-items: center; width: 20px; height: 20px; margin-right: 8px; border-radius: 50%; font: 700 11px var(--body); background: var(--line); color: var(--ink); }
+.node.auto::before { background: var(--acc); color: #fff; }
+.node.check::before { background: var(--acc-2); color: #fff; }
+.legend-row { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+.legend-row i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+
+.compare { margin-top: 28px; display: grid; grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1fr); row-gap: 26px; align-items: stretch; counter-reset: b a; }
+.col-head { display: grid; gap: 2px; padding-bottom: 4px; }
+.col-head b { font: 700 18px var(--body); }
+.col-head span { font-size: 14px; color: var(--muted); }
+.manual-h b { color: var(--coral); } .auto-h b { color: var(--acc); }
+.sbox { position: relative; display: flex; align-items: center; gap: 10px; border-radius: 12px; padding: 12px 14px; font-size: 15px; font-weight: 500; min-height: 50px; }
+.sbox::before { display: inline-grid; place-items: center; flex: none; width: 24px; height: 24px; border-radius: 50%; font: 700 12px var(--body); }
+.sbox.m { background: var(--surface); border: 1.5px solid var(--coral); color: var(--ink); }
+.sbox.m::before { counter-increment: b; content: counter(b); background: var(--coral-soft); color: var(--coral); }
+.sbox.a { background: var(--acc); border: 1.5px solid var(--acc); color: #fff; box-shadow: 0 6px 16px rgba(75, 46, 212, .18); }
+.sbox.a::before { counter-increment: a; content: counter(a); background: rgba(255, 255, 255, .22); color: #fff; }
+.compare > .sbox:nth-child(6) { } /* first row "Download" on the After side stays manual */
+.compare .sbox.m + .mid.same + .sbox.m::before { counter-increment: a; content: counter(a); }
+.sbox:not(.last)::after { content: "↓"; position: absolute; left: 50%; bottom: -24px; transform: translateX(-50%); font-size: 16px; line-height: 22px; color: var(--muted); }
+.sbox.a:not(.last)::after { color: var(--acc); }
+.mid { display: grid; place-items: center; font: 700 20px var(--body); color: var(--acc); }
+.mid.same { font: 600 12px var(--body); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.branch { border: 1.5px dashed var(--acc-2); background: var(--acc-2-soft); border-radius: 12px; padding: 12px 14px; font-size: 14px; }
+.branch b { color: var(--acc-2); }
+.legend-row { margin-top: 14px; }
+.legend-row i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.lg-m { border: 1.5px solid var(--coral); } .lg-a { background: var(--acc); } .lg-r { background: var(--acc-2-soft); border: 1.5px dashed var(--acc-2); }
+@media (max-width: 640px) {
+  .compare { grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr); row-gap: 22px; }
+  .sbox { font-size: 13px; padding: 10px; gap: 8px; }
+  .sbox::before { width: 20px; height: 20px; font-size: 11px; }
+  .mid { font-size: 16px; } .mid.same { font-size: 9px; letter-spacing: 0; }
+  .compare > div:nth-last-child(1) { grid-column: 1 / -1; }
+}
+
+/* requirements */
+.reqs { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; }
+.req { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; display: grid; gap: 10px; align-content: start; }
+.req h3 { font-family: var(--body); font-size: 16px; font-weight: 700; }
+.req ul { margin: 0; padding-left: 1.1em; display: grid; gap: 8px; font-size: 15px; }
+.req li::marker { color: var(--acc); }
+.req li b { color: var(--acc); }
+
+/* build */
+.build { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 26px; }
+.part { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; display: grid; gap: 8px; align-content: start; }
+.part h3 { font-family: var(--body); font-size: 16px; font-weight: 700; }
+.part p { font-size: 15px; color: var(--muted); }
+.rename { margin-top: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow-x: auto; }
+.rename table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: 14px; }
+.rename th, .rename td { text-align: left; padding: 11px 16px; border-bottom: 1px solid var(--line); }
+.rename th { font: 600 12px var(--body); color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.rename tr:last-child td { border-bottom: 0; }
+.rename td { font-family: var(--mono); font-size: 13px; }
+.rename td:last-child { color: var(--acc); }
+
+/* test & iterate */
+.fixes { margin-top: 24px; display: grid; gap: 10px; }
+.fix { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 14px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; font-size: 15px; }
+.fix .tag2 { font: 600 12px var(--body); color: #fff; background: var(--acc); border-radius: 999px; padding: 3px 10px; justify-self: start; }
+.fix .tag2.keep { background: var(--muted); }
+.fix .tag2.new { background: var(--teal); }
+
+/* dashboard */
+.dash { margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px 22px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.panel h3 { font-family: var(--body); font-size: 15px; font-weight: 700; }
+.panel p.note { font-size: 13px; color: var(--muted); }
+.panel svg { width: 100%; height: auto; display: block; overflow: visible; }
+.panel svg text { font-family: var(--body); fill: var(--muted); font-size: 12px; }
+.panel svg text.v { fill: var(--ink); font-family: var(--mono); }
+.wide { grid-column: 1 / -1; }
+.key { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+.key i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+
+.live { display: inline-flex; align-items: center; gap: 8px; font: 600 13px var(--body); color: var(--acc); background: var(--acc-soft); border-radius: 999px; padding: 5px 12px; margin-top: 4px; }
+.live .dot { width: 8px; height: 8px; border-radius: 50%; background: #2fbf71; box-shadow: 0 0 0 3px rgba(47, 191, 113, .25); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .4; } }
+@media (prefers-reduced-motion: reduce) { .live .dot { animation: none; } }
+
+/* next */
+.next { margin-top: 24px; display: grid; gap: 12px; }
+.next div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 14px; font-size: 15px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.next b { color: var(--acc); }
+.end { padding-block: 72px 96px; }
+
+@media (max-width: 860px) {
+  .kpis { grid-template-columns: 1fr 1fr; }
+  .reqs, .build, .dash { grid-template-columns: 1fr; }
+  .fix, .next div { grid-template-columns: 1fr; gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<header class="case-top">
+  <div class="wrap">
+    <a class="back" href="../../#autopilot">← Back to portfolio</a>
+    <h1>Course files on <em>autopilot</em></h1>
+    <p class="sub">I was spending time every week renaming and sorting course files by hand. So I mapped the steps, decided what a good result looked like, and built a system that files them for me and asks when it isn't sure.</p>
+    <p class="role-line">Solo project</p>
+    <div class="kpis">
+      <div class="kpi"><b id="k-auto">98</b><span id="k-auto-l">files filed with no manual step since October 10</span></div>
+      <div class="kpi"><b id="k-rate">84%</b><span>of course files needed no manual work</span></div>
+      <div class="kpi"><b>0</b><span>files deleted; every old version is kept</span></div>
+      <div class="kpi"><b>2×</b><span>a day an AI agent checks the professor's Google Drive</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1. Pain points -->
+  <section class="wrap block">
+    <h2>The problem</h2>
+    <p class="lead">Sorting each course file by hand took seven steps, and the file names rarely said which course it was for.</p>
+    <div class="compare" role="img" aria-label="Before: seven manual steps per file. After: one manual step, with six steps automated and unclear files sent to a review list.">
+      <div class="col-head manual-h"><b>Before</b><span>7 manual steps per file</span></div>
+      <div class="col-mid"></div>
+      <div class="col-head auto-h"><b>After</b><span>1 manual step</span></div>
+
+      <div class="sbox m">Download the file</div><div class="mid same">same</div><div class="sbox m">Download the file</div>
+      <div class="sbox m">Work out the course</div><div class="mid">→</div><div class="sbox a">Detect the course</div>
+      <div class="sbox m">Work out the module or week</div><div class="mid">→</div><div class="sbox a">Detect the module or week</div>
+      <div class="sbox m">Rename it</div><div class="mid">→</div><div class="sbox a">Rename to one standard</div>
+      <div class="sbox m">Pick the folder</div><div class="mid">→</div><div class="sbox a">File it in the right folder</div>
+      <div class="sbox m">Check for an older version</div><div class="mid">→</div><div class="sbox a">Archive the old version</div>
+      <div class="sbox m last">Remove duplicates</div><div class="mid">→</div><div class="sbox a last">Skip duplicates</div>
+
+      <div></div><div></div>
+      <div class="branch">If the course isn't clear at step 2, the file stays put and goes on a <b>review list</b> for me to decide.</div>
+    </div>
+    <div class="legend-row"><span><i class="lg-m"></i>Done by hand</span><span><i class="lg-a"></i>Automated</span><span><i class="lg-r"></i>Sent to me for a decision</span></div>
+  </section>
+
+  <!-- 2. Requirements and metrics -->
+  <section class="wrap block">
+    <h2>Rules and how I measure success</h2>
+    <p class="lead">No file ever gets deleted, and I track four numbers to check that it's working.</p>
+    <div class="reqs">
+      <div class="req">
+        <h3>Rules</h3>
+        <ul>
+          <li><b>Never delete.</b> When a new version arrives, the old one moves to an archive folder.</li>
+          <li><b>When unsure, ask.</b> A file it can't place goes on a review list instead of a guess.</li>
+          <li><b>One naming style</b> for every file: course, unit, topic and type.</li>
+          <li><b>Follow Brightspace's rules.</b> Its terms don't allow bots, so I still download files myself.</li>
+        </ul>
+      </div>
+      <div class="req">
+        <h3>How I measure success</h3>
+        <ul>
+          <li><b>Automation rate:</b> the share of course files filed without my help.</li>
+          <li><b>Review list:</b> how many files are waiting for me.</li>
+          <li><b>Lost files:</b> files deleted or overwritten. The goal is zero.</li>
+          <li><b>Full log:</b> every move is recorded, so anything can be undone.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Build -->
+  <section class="wrap block">
+    <h2>How it works</h2>
+    <p class="lead">The system sorts files on its own and only asks me when it isn't sure where one goes.</p>
+    <div class="build">
+      <div class="part"><h3>The auto-filer</h3><p>A small program that wakes up whenever a file lands in my downloads folder. It reads the file name, the folder and the first page to figure out the course, then renames and files it.</p></div>
+      <div class="part"><h3>The Drive checker</h3><p>An AI agent that checks my professor's Google Drive at 7am and 7pm and downloads anything new or updated.</p></div>
+      <div class="part"><h3>The review list</h3><p>Anything the auto-filer can't place goes on a short list with a note on why. I fix the name, and it gets filed the next time.</p></div>
+    </div>
+    <div class="rename">
+      <table>
+        <thead><tr><th>Downloaded as</th><th>Filed as</th></tr></thead>
+        <tbody>
+          <tr><td>15 DSO 529 Dynamic Reg Models_FA2026.pdf</td><td>DSO529/DSO529_Lecture15_Dynamic-Reg-Models_Slides.pdf</td></tr>
+          <tr><td>DSO529 Lab Session 4/Cars.xlsx</td><td>DSO529/Lab04/DSO529_Lab04_Cars_Data.xlsx</td></tr>
+          <tr><td>DSO576/Module_6_Homework.pdf</td><td>DSO576/Module06/DSO576_Module06_Homework.pdf</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 4. Test and iterate -->
+  <section class="wrap block">
+    <h2>Testing</h2>
+    <p class="lead">33 automated tests check every change, and I asked a second AI model, Codex, to look for weak spots. It found eight.</p>
+    <div class="fixes">
+      <div class="fix"><span class="tag2">Fixed</span><span>Two files with the same name could overwrite each other. Now an existing file is never replaced.</span></div>
+      <div class="fix"><span class="tag2">Fixed</span><span>A crash could corrupt the list of files already downloaded. It is now saved safely.</span></div>
+      <div class="fix"><span class="tag2">Fixed</span><span>The same file used in two courses was skipped as a duplicate. Now it only counts as a duplicate within one course.</span></div>
+      <div class="fix"><span class="tag2">Fixed</span><span>When several versions arrived together, an older one could end up as the current copy. Now the newest always wins.</span></div>
+      <div class="fix"><span class="tag2">Fixed</span><span>If replacing a file failed halfway, the current copy could go missing. Now it is put back.</span></div>
+      <div class="fix"><span class="tag2 keep">Not a bug</span><span>Loose name matching looked risky, but it is what lets a file called "Module_6_Homework.pdf" update the right homework. A test now makes sure it keeps working.</span></div>
+      <div class="fix"><span class="tag2 keep">Not needed</span><span>Two issues only matter for Google Docs files and very large zip files. My professor's folder has neither, so I'll fix them if that changes.</span></div>
+      <div class="fix"><span class="tag2 new">From the data</span><span>Temporary copies that Word and Excel create while a file is open kept landing on the review list. The system now ignores them.</span></div>
+    </div>
+  </section>
+
+  <!-- 5. Dashboard -->
+  <section class="wrap block end">
+    <h2>Results</h2>
+    <p class="live"><span class="dot"></span><span id="live-text">Live · updates every evening from the system's own log</span></p>
+    <p class="lead">A script counts every move each evening and updates these charts.</p>
+    <div class="dash">
+      <div class="panel wide">
+        <h3>Files handled each week</h3>
+        <div id="chart-weeks"></div>
+        <div class="key"><span><i style="background:var(--acc)"></i>Filed automatically</span><span><i style="background:var(--acc-2)"></i>Sent for review</span></div>
+        <p class="note">October 12 was the first full week, when it sorted my backlog of older downloads.</p>
+      </div>
+      <div class="panel">
+        <h3>What happened to each file</h3>
+        <div id="chart-outcomes"></div>
+      </div>
+      <div class="panel">
+        <h3>Why files were sent for review</h3>
+        <div id="chart-flags"></div>
+        <p class="note"><span id="flag-note">Almost half of the review list wasn't course material, so asking was the right call. The rest were data files with generic names like listings.csv.</span></p>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<script>
+(function () {
+  var NS = "http://www.w3.org/2000/svg";
+  // snapshot from November 6, 2026, used if the live file can't be loaded
+  var FALLBACK = { updated: "2026-11-06", since: "2026-10-10", auto_total: 98, outcomes: { filed: 81, replaced: 8, duplicate: 6, zip: 3 },
+    flagged_total: 35, flag_reasons: { course_generic: 19, not_course: 12, temp: 4 }, automation_rate: 0.8376,
+    weeks: [{ week: "2026-10-05", auto: 13, flagged: 2 }, { week: "2026-10-12", auto: 55, flagged: 12 }, { week: "2026-10-19", auto: 10, flagged: 13 }, { week: "2026-10-26", auto: 14, flagged: 0 }, { week: "2026-11-02", auto: 6, flagged: 8 }] };
+  var D = FALLBACK;
+  function el(t, a, p) { var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
+  function v(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function day(iso, withYear) { var d = new Date(iso + "T12:00:00"); return d.toLocaleDateString("en-US", withYear ? { month: "short", day: "numeric", year: "numeric" } : { month: "short", day: "numeric" }); }
+  function setText(id, t) { var n = document.getElementById(id); if (n) n.textContent = t; }
+  function draw() {
+    var ACC = v("--acc"), ACC2 = v("--acc-2"), SOFT = v("--acc-soft"), LINE = v("--line");
+    setText("k-auto", D.auto_total);
+    setText("k-rate", Math.round(D.automation_rate * 100) + "%");
+    setText("k-auto-l", "files filed with no manual step since " + day(D.since));
+    setText("live-text", "Live · updated " + day(D.updated, true) + " from the system's own log");
+    var weeks = D.weeks.slice(-8);
+    var host = document.getElementById("chart-weeks"); host.innerHTML = "";
+    var max = Math.max(10, Math.ceil(Math.max.apply(null, weeks.map(function (w) { return w.auto + w.flagged; })) / 10) * 10);
+    var W = 640, H = 220, base = 190, n = weeks.length, bw = Math.min(64, (W - 60) / n - 16), gap = n > 1 ? (W - 40 - n * bw) / (n - 1) : 0;
+    var s = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "Files filed automatically and sent for review, by week" }, host);
+    [0, max / 2, max].forEach(function (t) { var y = base - t / max * 170; el("line", { x1: 20, x2: W, y1: y, y2: y, stroke: LINE }, s); el("text", { x: 0, y: y + 4 }, s).textContent = t; });
+    weeks.forEach(function (w, i) {
+      var x = 30 + i * (bw + gap), ha = w.auto / max * 170, hf = w.flagged / max * 170;
+      el("rect", { x: x, y: base - ha, width: bw, height: ha, rx: 4, fill: ACC }, s);
+      if (hf) el("rect", { x: x, y: base - ha - hf, width: bw, height: hf, rx: 4, fill: ACC2 }, s);
+      el("text", { x: x + bw / 2, y: base - ha - hf - 6, "text-anchor": "middle", class: "v" }, s).textContent = w.auto + w.flagged;
+      el("text", { x: x + bw / 2, y: base + 18, "text-anchor": "middle" }, s).textContent = day(w.week);
+    });
+    function bars(id, rows, color) {
+      var h = document.getElementById(id); h.innerHTML = "";
+      var mx = Math.max.apply(null, rows.map(function (r) { return r[1]; })) * 1.1 || 1;
+      var W2 = 380, row = 30, lw = 170, plot = W2 - lw - 40;
+      var sv = el("svg", { viewBox: "0 0 " + W2 + " " + (rows.length * row + 4), role: "img" }, h);
+      rows.forEach(function (r, i) {
+        var y = i * row;
+        el("text", { x: 0, y: y + 19 }, sv).textContent = r[0];
+        el("rect", { x: lw, y: y + 7, width: plot, height: 16, rx: 4, fill: SOFT }, sv);
+        el("rect", { x: lw, y: y + 7, width: Math.max(3, plot * r[1] / mx), height: 16, rx: 4, fill: r[2] || color }, sv);
+        el("text", { x: lw + plot * r[1] / mx + 6, y: y + 19, class: "v" }, sv).textContent = r[1];
+      });
+    }
+    var o = D.outcomes, f = D.flag_reasons;
+    bars("chart-outcomes", [["Filed", o.filed], ["New version, old archived", o.replaced], ["Duplicate skipped", o.duplicate], ["Zip unpacked", o.zip], ["Sent for review", D.flagged_total, ACC2]], ACC);
+    bars("chart-flags", [["Course data, generic name", f.course_generic], ["Not a course file", f.not_course], ["Word/Excel temp copy (ignored now)", f.temp, ACC2]], ACC);
+  }
+  draw();
+  fetch("metrics.json?t=" + Date.now()).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { if (d && d.weeks) { D = d; draw(); } }).catch(function () {});
+  if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+})();
+</script>
+</body>
+</html>
