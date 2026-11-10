@@ -1,10 +1,10 @@
 {
-  "updated": "2026-11-06",
+  "updated": "2026-11-09",
   "since": "2026-10-10",
-  "auto_total": 98,
+  "auto_total": 100,
   "outcomes": {
-    "filed": 81,
-    "replaced": 8,
+    "filed": 82,
+    "replaced": 9,
     "duplicate": 6,
     "zip": 3
   },
@@ -14,7 +14,7 @@
     "not_course": 12,
     "temp": 4
   },
-  "automation_rate": 0.8376,
+  "automation_rate": 0.8403,
   "files_deleted": 0,
   "weeks": [
     {
@@ -41,6 +41,11 @@
       "week": "2026-11-02",
       "auto": 6,
       "flagged": 8
+    },
+    {
+      "week": "2026-11-09",
+      "auto": 2,
+      "flagged": 0
     }
   ]
 }
