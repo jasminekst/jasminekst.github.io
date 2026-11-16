@@ -1,20 +1,20 @@
 {
-  "updated": "2026-11-12",
+  "updated": "2026-11-15",
   "since": "2026-10-10",
-  "auto_total": 108,
+  "auto_total": 111,
   "outcomes": {
-    "filed": 88,
+    "filed": 91,
     "replaced": 10,
     "duplicate": 7,
     "zip": 3
   },
-  "flagged_total": 37,
+  "flagged_total": 39,
   "flag_reasons": {
-    "course_generic": 21,
+    "course_generic": 23,
     "not_course": 12,
     "temp": 4
   },
-  "automation_rate": 0.8372,
+  "automation_rate": 0.8284,
   "files_deleted": 0,
   "weeks": [
     {
@@ -44,8 +44,8 @@
     },
     {
       "week": "2026-11-09",
-      "auto": 10,
-      "flagged": 2
+      "auto": 13,
+      "flagged": 4
     }
   ]
 }
