@@ -1,9 +1,9 @@
 {
-  "updated": "2026-11-15",
+  "updated": "2026-11-16",
   "since": "2026-10-10",
-  "auto_total": 111,
+  "auto_total": 112,
   "outcomes": {
-    "filed": 91,
+    "filed": 92,
     "replaced": 10,
     "duplicate": 7,
     "zip": 3
@@ -14,7 +14,7 @@
     "not_course": 12,
     "temp": 4
   },
-  "automation_rate": 0.8284,
+  "automation_rate": 0.8296,
   "files_deleted": 0,
   "weeks": [
     {
@@ -46,6 +46,11 @@
       "week": "2026-11-09",
       "auto": 13,
       "flagged": 4
+    },
+    {
+      "week": "2026-11-16",
+      "auto": 1,
+      "flagged": 0
     }
   ]
 }
